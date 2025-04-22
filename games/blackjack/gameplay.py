@@ -1,6 +1,7 @@
 import streamlit as st
 from .deck import Deck, Card, Hand
 
+
 # Initialize player, dealer, deck and game play. Cache these variables
 @st.cache_data()
 def start_game_cached():
@@ -21,6 +22,7 @@ def start_game_cached():
     player.deal(game_deck.deal(), False)
     dealer.deal(game_deck.deal(), True)
     return game_deck, dealer, player
+
 
 def place_bet():
     """Run this start a new game"""
@@ -43,20 +45,23 @@ def dealer_finish(game_deck, dealer, player):
     dealer.reveal()
 
 # function to wrap up the game - display results, update bankroll
-def finish(game_deck, dealer, player, result):
+def finish(result, game_deck, dealer, player):
     result_elements = st.container()
     payout = 0
     if result == "win":
         result_elements.header("You win!!")
-        payout = int(st.session_state.blackjack)
+        payout = int(st.session_state.bet_amount)
     elif result == "lose":
         result_elements.header("You lose!!")
-        payout = int(st.session_state.blackjack) * -1
-    else:
+        payout = int(st.session_state.bet_amount) * -1
+    elif result == "tie":
         result_elements.header("It's a tie...")
+    else:
+        raise ValueError("function not called with 'win' 'lose' or 'tie'")
     
     st.session_state.bankroll += payout
     st.session_state.blackjack = "new"
+    st.session_state.hits = 0
     start_game_cached.clear()
     result_elements.button("New Game?")
 
@@ -78,23 +83,34 @@ def continue_game(game_deck, dealer, player):
         hit = st.button("Hit", disabled=True)
         stand = st.button("Stand", disabled=True)
         st.write("Blackjack!!! 🎉")
+        print(dealer)
         dealer_finish(game_deck, dealer, player)
+        print(dealer)
         if dealer.total1 == 21 or dealer.total2 == 21:
             finish("tie", game_deck, dealer, player)
         else:
             finish("win", game_deck, dealer, player)
     # option to hit or stand
     else: 
-        print('op 3')
-        hit = st.button("Hit")
-        stand = st.button("Stand")
+        
+        def hit_cb():
+            st.session_state.hits += 1
+        def stand_cb():
+            st.session_state.stood = True
+        
+        hit = None
+        stand = None
+        if st.session_state.stood == False:
+            hit = st.button("Hit", on_click=hit_cb)
+            stand = st.button("Stand", on_click=stand_cb)
+        else:
+            hit = st.button("Hit", on_click=hit_cb, disabled=True)
+            stand = st.button("Stand", on_click=stand_cb, disabled=True)
 
-        if hit:
-            print('entered')
-            player.deal(game_deck.deal(), False)
-            print(player)
+        
         if stand:
             dealer_finish(game_deck, dealer, player)
+
             player_result = player.total1
             if player.total2 > player.total1 and player.total2 <= 21:
                 player_result = player.total2
@@ -103,8 +119,11 @@ def continue_game(game_deck, dealer, player):
                 dealer_result = dealer.total2
             
             if dealer_result > 21 or dealer_result < player_result:
+                print("player wins")
                 finish("win", game_deck, dealer, player)
             elif dealer_result > player_result:
+                print("player loses")
                 finish("lose", game_deck, dealer, player)
             else:
+                print("tie")
                 finish("tie", game_deck, dealer, player)
