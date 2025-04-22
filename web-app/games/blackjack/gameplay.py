@@ -5,7 +5,10 @@ from .deck import Deck, Card, Hand
 # Initialize player, dealer, deck and game play. Cache these variables
 @st.cache_data()
 def start_game_cached():
-    print('restarting game')
+    """
+        This function generates a new deck and deals a new hand.
+        Because it is cached, it can maintain the state of a deck and of hands when called twice.
+    """
     my_card_list = [
         "2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AH", 
         "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AS", 
@@ -25,7 +28,7 @@ def start_game_cached():
 
 
 def place_bet():
-    """Run this start a new game"""
+    """Run this to start a new game - allow player to place a bet."""
 
     def callback(bet_amt):
         """callback function to set the game state before the page is reloaded"""
@@ -38,24 +41,28 @@ def place_bet():
     st.button("Let's Go!", on_click=callback, args=[bet])
     
             
-# function to let dealer deal self cards if needed
 def dealer_finish(game_deck, dealer, player):
+    """
+        This function allows the dealer to deal self cards if desired.
+        Dealer is programmed to hit below 17 (must stand on 17).
+    """
     while dealer.total1 < 17 and (dealer.total2 == 0 or dealer.total2 < 17):
         dealer.deal(game_deck.deal(), False)
     dealer.reveal()
 
-# function to wrap up the game - display results, update bankroll
+
 def finish(result, game_deck, dealer, player):
-    result_elements = st.container()
+    """This function wraps up the game - determine winner, display results, update bankroll"""
+    
     payout = 0
     if result == "win":
-        result_elements.header("You win!!")
+        st.header("You win!!")
         payout = int(st.session_state.bet_amount)
     elif result == "lose":
-        result_elements.header("You lose!!")
+        st.header("You lose!!")
         payout = int(st.session_state.bet_amount) * -1
     elif result == "tie":
-        result_elements.header("It's a tie...")
+        st.header("It's a tie...")
     else:
         raise ValueError("function not called with 'win' 'lose' or 'tie'")
     
@@ -63,12 +70,12 @@ def finish(result, game_deck, dealer, player):
     st.session_state.blackjack = "new"
     st.session_state.hits = 0
     start_game_cached.clear()
-    result_elements.button("New Game?")
+    st.button("New Game?")
 
 
-# function to continue gameplay - show hit/stand options if available
 def continue_game(game_deck, dealer, player):
-# show buttons for hit or stand - player options
+    """This function assesses the state of the game and determines what options the player has, if any. 
+    This function contains the only calls to "finish" which terminates the game."""
 
     # bust
     if player.total1 > 21:
