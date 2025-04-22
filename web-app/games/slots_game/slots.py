@@ -6,6 +6,7 @@ icons =["🍒", "🍋", "🔔", "💎", "7️⃣"]
 
 def play_slots():
     initial_count()
+
     col1, col2 = st.columns([3, 1])
     with col1:
         st.title("Welcome to Slots! 🎰")
@@ -13,29 +14,41 @@ def play_slots():
         st.markdown(f"**Shame Counter:** {st.session_state.shame_counter}")
 
     st.write(f"Bankroll: ${st.session_state.bankroll}")
-    bet_amount = st.number_input("Enter your bet amount:", min_value=1, max_value=st.session_state.bankroll)
+    #bet_input = st.number_input("Enter your bet amount:", min_value=1, max_value=st.session_state.bankroll, step=1)
     
-    if bet_amount != st.session_state.bet_amount:
-        st.session_state.bet_amount = bet_amount
+    if 'bet_amount' not in st.session_state:
+       st.session_state.bet_amount = 1
+
+    st.number_input(
+        "Enter your bet amount:",
+        min_value=1,
+        max_value=st.session_state.bankroll,
+        step=1,
+        value=st.session_state.bet_amount,
+        key="bet_amount"
+    )
 
     if st.button("Spin! 💰"):
+        bet_amount = st.session_state.bet_amount
+
         if bet_amount > st.session_state.bankroll:
             st.warning("You don't have enough funds to place this bet.")
         else:
-             st.session_state.bankroll -= bet_amount
-             i = spin()
-             st.write(" ".join(i))
-             result, win_amount = payout(i, bet_amount)
-             st.write(result)
-             st.session_state.bankroll += win_amount
+            #st.session_state.bet_amount = bet_amount
+            st.session_state.bankroll -= bet_amount
+            i = spin()
+            st.write(" ".join(i))
+            result, win_amount = payout(i, bet_amount)
+            st.write(result)
+            st.session_state.bankroll += win_amount
 
-             # Add to shame counter
-             if st.session_state.bankroll <= 0:
+            # Add to shame counter
+            if st.session_state.bankroll <= 0:
                 st.session_state.shame_counter += 1
                 st.write("You're bankrupt! Reloading funds...")
                 st.session_state.bankroll = 1000
-                
             #st.experimental_rerun()
+                
 def spin():
     return [random.choice(icons) for i in range(3)]
 
