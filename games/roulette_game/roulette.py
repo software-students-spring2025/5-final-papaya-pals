@@ -11,9 +11,8 @@ def play_roulette():
         st.title("Welcome to Roulette! 🔴⚫️ ")
     with col2:
         st.markdown(f"**Shame Counter:** {st.session_state.shame_counter}")
-
-    st.write(f"Bankroll: ${st.session_state.bankroll}")
-    #bet_amount = st.number_input("Enter your bet amount:", min_value=1, max_value=st.session_state.bankroll)
+        st.write(f"Bankroll: ${st.session_state.bankroll}")
+    bet_amount = st.number_input("Enter your bet amount:", min_value=1, max_value=st.session_state.bankroll)
     
     if bet_amount != st.session_state.bet_amount:
         st.session_state.bet_amount = bet_amount
