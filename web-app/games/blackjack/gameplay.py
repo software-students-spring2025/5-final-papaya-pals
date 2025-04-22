@@ -72,45 +72,68 @@ def continue_game(game_deck, dealer, player):
 
     # bust
     if player.total1 > 21:
-        print('op 1')
-        hit = st.button("Hit", disabled=True)
-        stand = st.button("Stand", disabled=True)
+        # show (disabled) hit and stand buttons
+        col1, col2, extra = st.columns([0.1, 0.2, 0.7])
+        with col1:
+            hit = st.button("Hit", disabled=True)
+        with col2:
+            stand = st.button("Stand", disabled=True)
+        
+        # player loses
         st.write("Bust :( 💥")
         finish("lose", game_deck, dealer, player)
+    
     # blackjack
     elif player.total1 == 21 or player.total2 == 21: 
-        print('op 2')
-        hit = st.button("Hit", disabled=True)
-        stand = st.button("Stand", disabled=True)
+        
+        # show (disabled) hit and stand buttons
+        col1, col2, extra = st.columns([0.1, 0.2, 0.7])
+        with col1:
+            hit = st.button("Hit", disabled=True)
+        with col2:
+            stand = st.button("Stand", disabled=True)
+        
         st.write("Blackjack!!! 🎉")
-        print(dealer)
+
+        # allow dealer to finish
         dealer_finish(game_deck, dealer, player)
-        print(dealer)
+
+        # determine winner
         if dealer.total1 == 21 or dealer.total2 == 21:
             finish("tie", game_deck, dealer, player)
         else:
             finish("win", game_deck, dealer, player)
+    
     # option to hit or stand
     else: 
         
+        # callback functions to change state of app when buttons clicked
         def hit_cb():
             st.session_state.hits += 1
         def stand_cb():
             st.session_state.stood = True
-        
+
+        # display hit and stand buttons
+        col1, col2, extra = st.columns([0.1, 0.2, 0.7])
         hit = None
         stand = None
         if st.session_state.stood == False:
-            hit = st.button("Hit", on_click=hit_cb)
-            stand = st.button("Stand", on_click=stand_cb)
+            with col1:
+                hit = st.button("Hit", on_click=hit_cb)
+            with col2:
+                stand = st.button("Stand", on_click=stand_cb)
         else:
-            hit = st.button("Hit", on_click=hit_cb, disabled=True)
-            stand = st.button("Stand", on_click=stand_cb, disabled=True)
+            with col1:
+                hit = st.button("Hit", on_click=hit_cb, disabled=True)
+            with col2:
+                stand = st.button("Stand", on_click=stand_cb, disabled=True)
 
-        
+        # if stand was pressed last: 
         if stand:
+            # allow dealer to finish
             dealer_finish(game_deck, dealer, player)
 
+            # determine winner
             player_result = player.total1
             if player.total2 > player.total1 and player.total2 <= 21:
                 player_result = player.total2
@@ -119,11 +142,8 @@ def continue_game(game_deck, dealer, player):
                 dealer_result = dealer.total2
             
             if dealer_result > 21 or dealer_result < player_result:
-                print("player wins")
                 finish("win", game_deck, dealer, player)
             elif dealer_result > player_result:
-                print("player loses")
                 finish("lose", game_deck, dealer, player)
             else:
-                print("tie")
                 finish("tie", game_deck, dealer, player)
