@@ -100,21 +100,11 @@ class Hand:
             self.total1 += 1
             self.total2 += 11
 
-            # remove the larger total if it's a bust
-            if self.total2 > 21:
-                self.total2 = 0
-
         # all other cards
         else:
             self.total1 += card.value
-            if self.total2 > 0:
-                self.total2 += card.value
-                # remove the larger total if it's a bust
-                if self.total2 > 21:
-                    self.total2 = 0
-
+            self.total2 += card.value
                 
-
         self.cards.append(card.name)
         if hidden: 
             self.images.append("back")

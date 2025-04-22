@@ -46,7 +46,8 @@ def dealer_finish(game_deck, dealer, player):
         This function allows the dealer to deal self cards if desired.
         Dealer is programmed to hit below 17 (must stand on 17).
     """
-    while dealer.total1 < 17 and (dealer.total2 == 0 or dealer.total2 < 17):
+    # while the first total is still less than 17, and while the second total is between 17 and 21
+    while dealer.total1 < 17 and (dealer.total2 < 17 or dealer.total2 > 21):
         dealer.deal(game_deck.deal(), False)
     dealer.reveal()
 
@@ -69,6 +70,7 @@ def finish(result, game_deck, dealer, player):
     st.session_state.bankroll += payout
     st.session_state.blackjack = "new"
     st.session_state.hits = 0
+    st.session_state.stood = False
     start_game_cached.clear()
     st.button("New Game?")
 
