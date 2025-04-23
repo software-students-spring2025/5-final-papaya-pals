@@ -28,9 +28,6 @@ else:
     st.button("Logout", onclick=load_logout_cb)
 
 
-
-
-
 if st.session_state.current_page == "slots":
     play_slots()
 elif st.session_state.current_page == "blackjack":
