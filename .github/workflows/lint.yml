@@ -21,6 +21,7 @@ jobs:
           pipenv shell --fancy --python $(which python)
       - name: Lint with pylint
         run: |
+          cd web-app
           pipenv run pylint *.py
           pipenv run pylint **/*.py
           pipenv run pylint **/**/*.py
