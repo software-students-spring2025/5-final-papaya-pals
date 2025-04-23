@@ -1,6 +1,6 @@
 import streamlit as st
 import random
-from ..initialize import initial_count
+
 '''
 colors = ["🔴", "⚫️"]
 
@@ -18,10 +18,6 @@ def play_roulette():
         st.session_state.bet_amount = bet_amount
 '''
 
-import streamlit as st
-import random
-from ..initialize import initial_count
-
 # Standard European roulette red numbers
 RED_NUMBERS = {
     1, 3, 5, 7, 9, 12, 14, 16, 18,
@@ -34,7 +30,6 @@ def get_color(num):
     return "Red" if num in RED_NUMBERS else "Black"
 
 def play_roulette():
-    initial_count()
 
     col1, col2 = st.columns([3, 1])
     with col1:
