@@ -14,8 +14,8 @@ def play_slots():
         st.markdown(f"**Shame Counter:** {st.session_state.shame_counter}")
 
     st.write(f"Bankroll: ${st.session_state.bankroll}")
-    #bet_input = st.number_input("Enter your bet amount:", min_value=1, max_value=st.session_state.bankroll, step=1)
     
+    # Session state
     if 'bet_amount' not in st.session_state:
        st.session_state.bet_amount = 1
 
@@ -24,17 +24,17 @@ def play_slots():
         min_value=1,
         max_value=st.session_state.bankroll,
         step=1,
-        value=st.session_state.bet_amount,
+        value=st.session_state.bet_amount, # This fixed the bet logic
         key="bet_amount"
     )
 
+    #Spin the slot machine
     if st.button("Spin! 💰"):
         bet_amount = st.session_state.bet_amount
 
         if bet_amount > st.session_state.bankroll:
             st.warning("You don't have enough funds to place this bet.")
         else:
-            #st.session_state.bet_amount = bet_amount
             st.session_state.bankroll -= bet_amount
             i = spin()
             st.write(" ".join(i))
@@ -47,7 +47,6 @@ def play_slots():
                 st.session_state.shame_counter += 1
                 st.write("You're bankrupt! Reloading funds...")
                 st.session_state.bankroll = 1000
-            #st.experimental_rerun()
                 
 def spin():
     return [random.choice(icons) for i in range(3)]
