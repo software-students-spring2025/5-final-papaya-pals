@@ -1,22 +1,8 @@
-import streamlit as st
+"""This module provides functionality to run the roulette game"""
+
 import random
+import streamlit as st
 
-'''
-colors = ["🔴", "⚫️"]
-
-def play_roulette():
-    initial_count()
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        st.title("Welcome to Roulette! 🔴⚫️ ")
-    with col2:
-        st.markdown(f"**Shame Counter:** {st.session_state.shame_counter}")
-        st.write(f"Bankroll: ${st.session_state.bankroll}")
-    bet_amount = st.number_input("Enter your bet amount:", min_value=1, max_value=st.session_state.bankroll)
-    
-    if bet_amount != st.session_state.bet_amount:
-        st.session_state.bet_amount = bet_amount
-'''
 
 # Standard European roulette red numbers
 RED_NUMBERS = {
@@ -25,11 +11,14 @@ RED_NUMBERS = {
 }
 
 def get_color(num):
+    """This function returns the color of the chosen number"""
+
     if num == 0:
         return "Green"
     return "Red" if num in RED_NUMBERS else "Black"
 
 def play_roulette():
+    """This function runs the roulette game"""
 
     col1, col2 = st.columns([3, 1])
     with col1:
@@ -53,7 +42,12 @@ def play_roulette():
     )
 
     # Main number pick (optional)
-    number_pick = st.number_input("Pick a number (0–36) [Optional]", min_value=0, max_value=36, step=1)
+    number_pick = st.number_input(
+        "Pick a number (0–36) [Optional]",
+        min_value=0,
+        max_value=36,
+        step=1
+    )
 
     # Red/Black selection
     color_bet = st.radio("Bet on a color:", ["None", "Red", "Black"])
@@ -89,7 +83,10 @@ def play_roulette():
 
             # Even/Odd bet
             if parity_bet != "None" and result != 0:
-                if (parity_bet == "Even" and result % 2 == 0) or (parity_bet == "Odd" and result % 2 == 1):
+                if (
+                    (parity_bet == "Even" and result % 2 == 0) or
+                    (parity_bet == "Odd" and result % 2 == 1)
+                ):
                     winnings += bet
                     st.success(f"Parity match! +${bet}")
                 else:

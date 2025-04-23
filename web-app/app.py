@@ -1,27 +1,32 @@
+"""This application provides the basis of the web app structure."""
+
 import streamlit as st
 from games.slots_game.slots import play_slots
 from games.roulette_game.roulette import play_roulette
 from games.blackjack.main import play_blackjack
-from games.home import show_home
-from games.login import show_login
-from games.initialize import set_default_session_vars, reset_to_default
-from games.reload import show_reload
+from pages.home import show_home
+from pages.login import show_login
+from pages.initialize import set_default_session_vars, reset_to_default
+from pages.reload import show_reload
 
 # set session vars
 set_default_session_vars()
 
 # set page to "home"
 def load_homepage_cb():
+    """This callback function will get called when user presses the home button"""
     reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "home"
 
 # set page to "login"
 def load_login_cb():
+    """This callback function will get called when user presses the login button"""
     reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "login"
 
-# log out 
+# log out
 def load_logout_cb():
+    """This callback function will get called when user presses the logout button"""
     reset_to_default(st.session_state.current_page)
     st.session_state.user = ""
     st.session_state.current_page = "home"
@@ -57,4 +62,4 @@ elif st.session_state.current_page == "login":
 elif st.session_state.current_page == "reload":
     show_reload()
 else:
-    raise Exception("Unknown page request from st.session_state.current_page")
+    raise ValueError("Unknown page request from st.session_state.current_page")
