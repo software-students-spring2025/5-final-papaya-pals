@@ -27,4 +27,5 @@ jobs:
           pipenv run pylint **/**/*.py
       - name: Format with black
         run: |
+          cd web-app
           pipenv run black --diff --check .
