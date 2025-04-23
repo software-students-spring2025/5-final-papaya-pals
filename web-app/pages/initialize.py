@@ -1,11 +1,16 @@
+"""This module provides functionality to handle setting and manipulating session variables"""
+
 import streamlit as st
-from .blackjack.gameplay import start_game_cached
+from .games.blackjack.gameplay import start_game_cached
+
 
 def set_default_session_vars():
     """
-    This function checks that every necessary session variable has been set to at least the default value.
+    This function checks that every necessary session variable has been set to
+        at least the default value.
     It will not change any session variables that already exist.
     """
+
     # global
     if "bankroll" not in st.session_state:
         st.session_state.bankroll = 1000
@@ -36,10 +41,11 @@ def set_default_session_vars():
 def reset_to_default(old_page):
     """
     This function resets any session vars to their default values.
-    This means you can navigate to the homepage from the blackjack page; 
-        when you later return to the blackjack page, the session variables 
+    This means you can navigate to the homepage from the blackjack page;
+        when you later return to the blackjack page, the session variables
         for blackjack will be reset to a new game.
     """
+
     if old_page == "blackjack":
         st.session_state.blackjack = "new"
         start_game_cached.clear()
