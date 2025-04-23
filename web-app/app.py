@@ -4,21 +4,24 @@ from games.roulette_game.roulette import play_roulette
 from games.blackjack.main import play_blackjack
 from games.home import show_home
 from games.login import show_login
-from games.initialize import set_default_session_vars
+from games.initialize import set_default_session_vars, reset_to_default
 
 # set session vars
 set_default_session_vars()
 
 # set page to "home"
 def load_homepage_cb():
+    reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "home"
 
 # set page to "login"
 def load_login_cb():
+    reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "login"
 
 # log out 
 def load_logout_cb():
+    reset_to_default(st.session_state.current_page)
     st.session_state.user = ""
     st.session_state.current_page = "home"
 

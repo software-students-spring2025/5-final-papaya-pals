@@ -71,6 +71,7 @@ def finish(result, game_deck, dealer, player):
     st.session_state.blackjack = "new"
     st.session_state.blackjack_hits = 0
     st.session_state.blackjack_stood = False
+    st.session_state.blackjack_bet_amount = 0
     start_game_cached.clear()
     st.button("New Game?")
 
