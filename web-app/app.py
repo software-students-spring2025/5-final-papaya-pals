@@ -5,6 +5,7 @@ from games.blackjack.main import play_blackjack
 from games.home import show_home
 from games.login import show_login
 from games.initialize import set_default_session_vars, reset_to_default
+from games.reload import show_reload
 
 # set session vars
 set_default_session_vars()
@@ -34,6 +35,10 @@ with st.sidebar:
     else:
         st.button("Logout", on_click=load_logout_cb)
 
+# if bankroll is zero, redirect to reload page no matter what
+if st.session_state.bankroll == 0:
+    st.session_state.current_page = "reload"
+
 # load correct page
 if st.session_state.current_page == "slots":
     play_slots()
@@ -49,5 +54,7 @@ elif st.session_state.current_page == "unknown_game2":
     st.write("on game page")
 elif st.session_state.current_page == "login":
     show_login()
+elif st.session_state.current_page == "reload":
+    show_reload()
 else:
     raise Exception("Unknown page request from st.session_state.current_page")
