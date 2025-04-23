@@ -33,7 +33,7 @@ def place_bet():
     def callback(bet_amt):
         """callback function to set the game state before the page is reloaded"""
         st.session_state.blackjack = "ongoing"
-        st.session_state.bet_amount = bet_amt
+        st.session_state.blackjack_bet_amount = bet_amt
 
     st.subheader("First, place your bet:")
     bet = st.number_input("How much are you putting on the table??", min_value=1, max_value=st.session_state.bankroll)
@@ -58,10 +58,10 @@ def finish(result, game_deck, dealer, player):
     payout = 0
     if result == "win":
         st.header("You win!!")
-        payout = int(st.session_state.bet_amount)
+        payout = int(st.session_state.blackjack_bet_amount)
     elif result == "lose":
         st.header("You lose!!")
-        payout = int(st.session_state.bet_amount) * -1
+        payout = int(st.session_state.blackjack_bet_amount) * -1
     elif result == "tie":
         st.header("It's a tie...")
     else:
@@ -69,8 +69,8 @@ def finish(result, game_deck, dealer, player):
     
     st.session_state.bankroll += payout
     st.session_state.blackjack = "new"
-    st.session_state.hits = 0
-    st.session_state.stood = False
+    st.session_state.blackjack_hits = 0
+    st.session_state.blackjack_stood = False
     start_game_cached.clear()
     st.button("New Game?")
 
@@ -118,15 +118,15 @@ def continue_game(game_deck, dealer, player):
         
         # callback functions to change state of app when buttons clicked
         def hit_cb():
-            st.session_state.hits += 1
+            st.session_state.blackjack_hits += 1
         def stand_cb():
-            st.session_state.stood = True
+            st.session_state.blackjack_stood = True
 
         # display hit and stand buttons
         col1, col2, extra = st.columns([0.1, 0.2, 0.7])
         hit = None
         stand = None
-        if st.session_state.stood == False:
+        if st.session_state.blackjack_stood == False:
             with col1:
                 hit = st.button("Hit", on_click=hit_cb)
             with col2:

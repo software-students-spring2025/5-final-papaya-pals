@@ -7,27 +7,12 @@ from .gameplay import start_game_cached, place_bet, continue_game
 
 def play_blackjack():
 
-    # session variables
-    if "blackjack" not in st.session_state:
-        st.session_state.blackjack = "new"
-        start_game_cached.clear()
-    if "bankroll" not in st.session_state:
-        st.session_state.bankroll = 1000
-    if "shame_counter" not in st.session_state:
-        st.session_state.shame_counter = 0
-    if "bet_amount" not in st.session_state:
-        st.session_state.bet_amount = 0
-    if "hits" not in st.session_state:
-        st.session_state.hits = 0
-    if "stood" not in st.session_state:
-        st.session_state.stood = False
-
     # show basic frontend elements
     col1, col2 = st.columns([3, 1])
     with col2:
         st.markdown(f"**Shame Counter:** {st.session_state.shame_counter}")
         st.markdown(f"**Bankroll:** {st.session_state.bankroll}")
-        st.markdown(f"**Current bet:** {st.session_state.bet_amount}")
+        st.markdown(f"**Current bet:** {st.session_state.blackjack_bet_amount}")
     with col1:
         st.title("Welcome to Blackjack! ♤ ♡ ♧ ♢")
 
@@ -39,7 +24,7 @@ def play_blackjack():
     if st.session_state.blackjack == "ongoing":
         # deal, or get cached elements for game continuation
         game_deck, dealer, player = start_game_cached()
-        for i in range(0, st.session_state.hits):
+        for i in range(0, st.session_state.blackjack_hits):
             player.deal(game_deck.deal(), False)
 
         # empty elements
