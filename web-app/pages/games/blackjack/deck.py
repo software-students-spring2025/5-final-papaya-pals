@@ -85,7 +85,7 @@ class Card:
         elif name[0:1] == "K":
             self.value = 13
         elif name[0:1] not in ["2", "3", "4", "5", "6", "7", "8", "9"]:
-            raise ValueError('unknown card value')
+            raise ValueError("unknown card value")
         else:
             self.value = int(name[0:1])
 
@@ -94,6 +94,16 @@ class Card:
             raise ValueError("unknown suit in card instance - 2")
         self.suit = name[2:3]
         self.name = name
+
+    def get_value(self):
+        """This function returns the value of this card"""
+
+        return self.value
+
+    def get_name(self):
+        """This function returns the name of this card"""
+
+        return self.name
 
 
 class Hand:
@@ -106,7 +116,15 @@ class Hand:
         self.images = []
         self.hidden = False
 
+    def __str__(self):
+        return (
+            f"total: {str(self.total1)},{str(self.total2)}\ncards: "
+            f"{str(self.cards)}\nimages: {str(self.images)}"
+        )
+
     def deal(self, card, hidden):
+        """Given a card as input, add this card to this hand"""
+
         if not isinstance(card, Card):
             raise TypeError("hand must be dealt a card object")
 
@@ -127,13 +145,9 @@ class Hand:
         else:
             self.images.append(card.name)
 
-    def __str__(self):
-        return (
-            f"total: {str(self.total1)},{str(self.total2)}\ncards: "
-            f"{str(self.cards)}\nimages: {str(self.images)}"
-        )
-
     def reveal(self):
+        """If hand has a hidden card (intended for dealer), permanently reveal this card now"""
+
         if "back" in self.images:
             self.images = self.cards
             self.hidden = False

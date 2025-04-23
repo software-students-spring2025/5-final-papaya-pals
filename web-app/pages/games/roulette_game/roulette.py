@@ -32,7 +32,7 @@ def play_roulette():
     if "roulette_bet_amount" not in st.session_state:
         st.session_state.roulette_bet_amount = 1
 
-    st.number_input(
+    _roulette_bet = st.number_input(
         "Enter your bet amount:",
         min_value=1,
         max_value=st.session_state.bankroll,
@@ -60,44 +60,46 @@ def play_roulette():
 
         if bet > st.session_state.bankroll:
             st.warning("You don't have enough funds to place this bet.")
-        else:
-            st.session_state.bankroll -= bet
-            result = random.randint(0, 36)
-            result_color = get_color(result)
-            st.write(f"The ball landed on: **{result} ({result_color})**")
+            return
 
-            winnings = 0
+        # else: if funds are sufficient
+        st.session_state.bankroll -= bet
+        result = random.randint(0, 36)
+        result_color = get_color(result)
+        st.write(f"The ball landed on: **{result} ({result_color})**")
 
-            # Number bet
-            if result == number_pick:
-                winnings += 35 * bet
-                st.success(f"You hit your number! +${35 * bet}")
+        winnings = 0
 
-            # Color bet
-            if color_bet != "None" and result != 0:
-                if result_color.lower() == color_bet.lower():
-                    winnings += bet
-                    st.success(f"Color match! +${bet}")
-                else:
-                    st.info("No match on color.")
+        # Number bet
+        if result == number_pick:
+            winnings += 35 * bet
+            st.success(f"You hit your number! +${35 * bet}")
 
-            # Even/Odd bet
-            if parity_bet != "None" and result != 0:
-                if (
-                    (parity_bet == "Even" and result % 2 == 0) or
-                    (parity_bet == "Odd" and result % 2 == 1)
-                ):
-                    winnings += bet
-                    st.success(f"Parity match! +${bet}")
-                else:
-                    st.info("No match on even/odd.")
+        # Color bet
+        if color_bet != "None" and result != 0:
+            if result_color.lower() == color_bet.lower():
+                winnings += bet
+                st.success(f"Color match! +${bet}")
+            else:
+                st.info("No match on color.")
 
-            st.session_state.bankroll += winnings
+        # Even/Odd bet
+        if parity_bet != "None" and result != 0:
+            if (
+                (parity_bet == "Even" and result % 2 == 0) or
+                (parity_bet == "Odd" and result % 2 == 1)
+            ):
+                winnings += bet
+                st.success(f"Parity match! +${bet}")
+            else:
+                st.info("No match on even/odd.")
 
-            if winnings == 0:
-                st.error("No wins this time!")
+        st.session_state.bankroll += winnings
 
-            if st.session_state.bankroll <= 0:
-                st.session_state.shame_counter += 1
-                st.warning("You're bankrupt! Reloading funds...")
-                st.session_state.bankroll = 1000
+        if winnings == 0:
+            st.error("No wins this time!")
+
+        if st.session_state.bankroll <= 0:
+            st.session_state.shame_counter += 1
+            st.warning("You're bankrupt! Reloading funds...")
+            st.session_state.bankroll = 1000

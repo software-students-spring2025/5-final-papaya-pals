@@ -18,7 +18,7 @@ def play_slots():
 
     st.write(f"Bankroll: ${st.session_state.bankroll}")
 
-    st.number_input(
+    _slots_bet = st.number_input(
         "Enter your bet amount:",
         min_value=1,
         max_value=st.session_state.bankroll,

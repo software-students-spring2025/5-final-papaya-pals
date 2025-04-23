@@ -97,7 +97,6 @@ def continue_game(game_deck, dealer, player):
         with col2:
             stand = st.button("Stand", disabled=True)
 
-        # player loses
         st.write("Bust :( 💥")
         finish("lose")
 
@@ -119,8 +118,8 @@ def continue_game(game_deck, dealer, player):
         # determine winner
         if dealer.total1 == 21 or dealer.total2 == 21:
             finish("tie")
-        else:
-            finish("win")
+            return
+        finish("win")
 
     # option to hit or stand
     else:
