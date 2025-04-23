@@ -5,10 +5,8 @@ import streamlit as st
 
 
 # Standard European roulette red numbers
-RED_NUMBERS = {
-    1, 3, 5, 7, 9, 12, 14, 16, 18,
-    19, 21, 23, 25, 27, 30, 32, 34, 36
-}
+RED_NUMBERS = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36}
+
 
 def get_color(num):
     """This function returns the color of the chosen number"""
@@ -16,6 +14,7 @@ def get_color(num):
     if num == 0:
         return "Green"
     return "Red" if num in RED_NUMBERS else "Black"
+
 
 def play_roulette():
     """This function runs the roulette game"""
@@ -37,16 +36,13 @@ def play_roulette():
         min_value=1,
         max_value=st.session_state.bankroll,
         step=1,
-        value=st.session_state.roulette_bet_amount, # Fixed bet logic
-        key="roulette_bet_amount"
+        value=st.session_state.roulette_bet_amount,  # Fixed bet logic
+        key="roulette_bet_amount",
     )
 
     # Main number pick (optional)
     number_pick = st.number_input(
-        "Pick a number (0–36) [Optional]",
-        min_value=0,
-        max_value=36,
-        step=1
+        "Pick a number (0–36) [Optional]", min_value=0, max_value=36, step=1
     )
 
     # Red/Black selection
@@ -85,9 +81,8 @@ def play_roulette():
 
         # Even/Odd bet
         if parity_bet != "None" and result != 0:
-            if (
-                (parity_bet == "Even" and result % 2 == 0) or
-                (parity_bet == "Odd" and result % 2 == 1)
+            if (parity_bet == "Even" and result % 2 == 0) or (
+                parity_bet == "Odd" and result % 2 == 1
             ):
                 winnings += bet
                 st.success(f"Parity match! +${bet}")

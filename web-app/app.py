@@ -1,9 +1,9 @@
 """This application provides the basis of the web app structure."""
 
 import streamlit as st
-from games.slots_game.slots import play_slots
-from games.roulette_game.roulette import play_roulette
-from games.blackjack.main import play_blackjack
+from pages.games.slots_game.slots import play_slots
+from pages.games.roulette_game.roulette import play_roulette
+from pages.games.blackjack.main import play_blackjack
 from pages.home import show_home
 from pages.login import show_login
 from pages.initialize import set_default_session_vars, reset_to_default
@@ -12,11 +12,13 @@ from pages.reload import show_reload
 # set session vars
 set_default_session_vars()
 
+
 # set page to "home"
 def load_homepage_cb():
     """This callback function will get called when user presses the home button"""
     reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "home"
+
 
 # set page to "login"
 def load_login_cb():
@@ -24,12 +26,14 @@ def load_login_cb():
     reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "login"
 
+
 # log out
 def load_logout_cb():
     """This callback function will get called when user presses the logout button"""
     reset_to_default(st.session_state.current_page)
     st.session_state.user = ""
     st.session_state.current_page = "home"
+
 
 # show sidebar
 with st.sidebar:

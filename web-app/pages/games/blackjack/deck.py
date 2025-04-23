@@ -1,9 +1,10 @@
 """
-This module contains functions to instantiate and manipulate the deck of cards 
+This module contains functions to instantiate and manipulate the deck of cards
     for a blackjack game
 """
 
 import random
+
 
 class Deck:
     """This is the class declaration for a deck object"""
@@ -29,7 +30,7 @@ class Deck:
         new_deck = []
 
         for i in range(len(self.cards), 0, -1):
-            rand = random.randint(0, i-1)
+            rand = random.randint(0, i - 1)
 
             new_deck.append(self.cards[rand])
             self.cards.remove(self.cards[rand])
@@ -45,6 +46,7 @@ class Deck:
 
 class Card:
     """This is the class declaration for a card object"""
+
     value = 0
     suit = ""
     name = ""

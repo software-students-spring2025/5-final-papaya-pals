@@ -2,23 +2,18 @@
 
 import streamlit as st
 from .deck import Deck, Hand
+from .cardlist import standard_cardlist
 
 
 # Initialize player, dealer, deck and game play. Cache these variables
 @st.cache_data()
 def start_game_cached():
     """
-        This function generates a new deck and deals a new hand.
-        Because it is cached, it can maintain the state of a deck and of hands when called twice.
+    This function generates a new deck and deals a new hand.
+    Because it is cached, it can maintain the state of a deck and of hands when called twice.
     """
-    my_card_list = [
-        "2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AH", 
-        "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AS", 
-        "2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC", "KC", "AC", 
-        "2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AD"
-        ]
 
-    game_deck = Deck(my_card_list)
+    game_deck = Deck(standard_cardlist)
     game_deck.shuffle()
     dealer = Hand()
     player = Hand()
@@ -34,6 +29,7 @@ def place_bet():
 
     def callback(bet_amt):
         """callback function to set the game state before the page is reloaded"""
+
         st.session_state.blackjack = "ongoing"
         st.session_state.blackjack_bet_amount = bet_amt
 
@@ -41,7 +37,7 @@ def place_bet():
     bet = st.number_input(
         "How much are you putting on the table??",
         min_value=1,
-        max_value=st.session_state.bankroll
+        max_value=st.session_state.bankroll,
     )
 
     st.button("Let's Go!", on_click=callback, args=[bet])
@@ -49,8 +45,8 @@ def place_bet():
 
 def dealer_finish(game_deck, dealer):
     """
-        This function allows the dealer to deal self cards if desired.
-        Dealer is programmed to hit below 17 (must stand on 17).
+    This function allows the dealer to deal self cards if desired.
+    Dealer is programmed to hit below 17 (must stand on 17).
     """
     # while the first total is still less than 17, and while the second total is between 17 and 21
     while dealer.total1 < 17 and (dealer.total2 < 17 or dealer.total2 > 21):
@@ -127,6 +123,7 @@ def continue_game(game_deck, dealer, player):
         # callback functions to change state of app when buttons clicked
         def hit_cb():
             st.session_state.blackjack_hits += 1
+
         def stand_cb():
             st.session_state.blackjack_stood = True
 

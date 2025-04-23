@@ -4,11 +4,10 @@ import random
 import streamlit as st
 
 
-
 def play_slots():
     """This function runs the slots game"""
 
-    all_icons =["🍒", "🍋", "🔔", "💎", "7️⃣"]
+    all_icons = ["🍒", "🍋", "🔔", "💎", "7️⃣"]
 
     col1, col2 = st.columns([3, 1])
     with col1:
@@ -23,11 +22,11 @@ def play_slots():
         min_value=1,
         max_value=st.session_state.bankroll,
         step=1,
-        value=st.session_state.slots_bet_amount, # This fixed the bet logic
-        key="slots_bet_amount"
+        value=st.session_state.slots_bet_amount,  # This fixed the bet logic
+        key="slots_bet_amount",
     )
 
-    #Spin the slot machine
+    # Spin the slot machine
     if st.button("Spin! 💰"):
         slots_bet_amount = st.session_state.slots_bet_amount
 
@@ -47,10 +46,12 @@ def play_slots():
                 st.write("You're bankrupt! Reloading funds...")
                 st.session_state.bankroll = 1000
 
+
 def spin(icons):
     """This function generates a randomly "spun" trio of icons"""
 
     return [random.choice(icons) for i in range(3)]
+
 
 def payout(icons, slots_bet_amount):
     """This function calculates the payout"""

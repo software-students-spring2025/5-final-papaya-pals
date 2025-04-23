@@ -40,7 +40,9 @@ def play_blackjack():
         continue_game(game_deck, dealer, player)
 
         # fill in page elements
-        dealer_images.image(["./static/images/" + img + ".png" for img in dealer.images], width=80)
+        dealer_images.image(
+            ["./static/images/" + img + ".png" for img in dealer.images], width=80
+        )
         if dealer.hidden is True:
             dealer_total.write("Dealer total: ???")
         else:
@@ -58,7 +60,9 @@ def play_blackjack():
             else:
                 dealer_total.write(f"Dealer total: {str(dealer.total1)}")
 
-        player_images.image(["./static/images/" + img + ".png" for img in player.images], width=80)
+        player_images.image(
+            ["./static/images/" + img + ".png" for img in player.images], width=80
+        )
         # if either total contains blackjack
         if player.total2 == 21 or player.total1 == 21:
             player_total.write("Player total: 21")
