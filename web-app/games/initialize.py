@@ -9,3 +9,6 @@ def initial_count():
 
     if "bet_amount" not in st.session_state:
         st.session_state.bet_amount = 1
+        
+    if "roulette_bet_amount" not in st.session_state:
+        st.session_state.roulette_bet_amount = 1
