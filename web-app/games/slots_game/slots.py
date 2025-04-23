@@ -5,6 +5,7 @@ from ..initialize import initial_count
 icons =["🍒", "🍋", "🔔", "💎", "7️⃣"]
 
 def play_slots():
+    print('playing')
     initial_count()
 
     col1, col2 = st.columns([3, 1])
