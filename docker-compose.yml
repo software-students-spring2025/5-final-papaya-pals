@@ -5,17 +5,36 @@ services:
     ports:
       - "8501:8501"
     environment:
-      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_URI=mongodb://mongo:27017/fruit_casino
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+    networks:
+      - fruit-casino-network
 
   mongo:
-    image: mongo
+    build: ./database
     restart: always
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+      - ./database/init:/docker-entrypoint-initdb.d
+    environment:
+      - MONGO_INITDB_DATABASE=fruit_casino
+    networks:
+      - fruit-casino-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   mongo_data:
+    name: fruit_casino_data
+
+networks:
+  fruit-casino-network:
+    name: fruit_casino_network
+    driver: bridge
