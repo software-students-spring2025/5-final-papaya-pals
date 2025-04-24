@@ -16,9 +16,8 @@ def play_slots():
         st.markdown(f"**Shame Counter:** {st.session_state.shame_counter}")
 
     st.write(f"Bankroll: ${st.session_state.bankroll}")
-    
-    # removed _slots_bet = assignment bc it was messing up the bets
-    st.number_input(
+
+    _slots_bet = st.number_input(
         "Enter your bet amount:",
         min_value=1,
         max_value=st.session_state.bankroll,
