@@ -39,6 +39,10 @@ async def test_create_user(db: Database):
     with pytest.raises(ValueError):
         await db.create_user(username)
 
+    # Test invalid username
+    with pytest.raises(ValueError):
+        await db.create_user("test@user")  # Contains special char
+
 @pytest.mark.asyncio
 async def test_get_user(db: Database):
     """Test user retrieval."""
@@ -69,6 +73,10 @@ async def test_update_user_bankroll(db: Database):
     amount = -200.0
     updated_user = await db.update_user_bankroll(username, amount)
     assert updated_user.bankroll == initial_bankroll + 500.0 + amount
+
+    # Test non-existent user
+    with pytest.raises(ValueError):
+        await db.update_user_bankroll("nonexistent", 100.0)
 
 @pytest.mark.asyncio
 async def test_record_game(db: Database):
@@ -112,18 +120,43 @@ async def test_leaderboard(db: Database):
     users = [
         ("user1", 2000.0),
         ("user2", 3000.0),
-        ("user3", 1000.0)
+        ("user3", 1000.0),
+        ("user4", 4000.0)
     ]
     
     for username, amount in users:
         user = await db.create_user(username)
         await db.update_user_bankroll(username, amount - user.bankroll)
     
-    leaderboard = await db.get_leaderboard(limit=3)
-    assert len(leaderboard) == 3
-    assert leaderboard[0].username == "user2"
-    assert leaderboard[1].username == "user1"
-    assert leaderboard[2].username == "user3"
+    # Test default limit
+    leaderboard = await db.get_leaderboard()
+    assert len(leaderboard) == 4
+    assert leaderboard[0].username == "user4"
+    assert leaderboard[1].username == "user2"
+
+    # Test custom limit
+    leaderboard = await db.get_leaderboard(limit=2)
+    assert len(leaderboard) == 2
+    assert leaderboard[0].username == "user4"
+
+@pytest.mark.asyncio
+async def test_hall_of_shame(db: Database):
+    """Test hall of shame functionality."""
+    # Create users and make them go bankrupt
+    users = ["user1", "user2"]
+    for username in users:
+        user = await db.create_user(username)
+        await db.record_game(
+            username=username,
+            game_type=GameType.ROULETTE,
+            bet_amount=user.bankroll,
+            result_amount=0.0,
+            game_details={"bet": "red", "result": "black"}
+        )
+    
+    hall_of_shame = await db.get_hall_of_shame()
+    assert len(hall_of_shame) == 2
+    assert all(user.shame_counter > 0 for user in hall_of_shame)
 
 @pytest.mark.asyncio
 async def test_user_stats(db: Database):
@@ -135,14 +168,16 @@ async def test_user_stats(db: Database):
     games = [
         (GameType.SLOTS, 100.0, 200.0, {"symbols": ["🍎", "🍎", "🍎"]}),
         (GameType.ROULETTE, 50.0, 0.0, {"bet": "red", "result": "black"}),
-        (GameType.BLACKJACK, 200.0, 400.0, {"cards": ["A♠", "K♥"]})
+        (GameType.BLACKJACK, 200.0, 400.0, {"cards": ["A♠", "K♥"]}),
+        (GameType.SLOTS, 150.0, 300.0, {"symbols": ["🍊", "🍊", "🍊"]})
     ]
     
     for game_type, bet, result, details in games:
         await db.record_game(username, game_type, bet, result, details)
     
     stats = await db.get_user_stats(username)
-    assert stats["total_games"] == 3
+    assert stats["total_games"] == 4
     assert stats["biggest_win"] == 200.0  # From blackjack
     assert stats["biggest_loss"] == -50.0  # From roulette
-    assert stats["avg_bet"] == pytest.approx(116.67, rel=1e-2)
+    assert stats["avg_bet"] == pytest.approx(125.0)
+    assert stats["favorite_game"] == GameType.SLOTS  # Most played game

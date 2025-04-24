@@ -56,13 +56,9 @@ python -m pytest tests/ --cov=src
 
 ## Docker
 
-Build the image:
+Build and run:
 ```bash
 docker build -t fruit-casino-db .
-```
-
-Run the container:
-```bash
 docker run -d \
   --name fruit-casino-db \
   -e MONGO_URI="mongodb://mongo:27017" \
@@ -70,24 +66,13 @@ docker run -d \
   fruit-casino-db
 ```
 
-## API Documentation
-
-### User Operations
+## API Examples
 
 ```python
-# Create user
+# Create and get user
 user = await db.create_user("username")
-
-# Get user
 user = await db.get_user("username")
 
-# Update bankroll
-user = await db.update_user_bankroll("username", amount)
-```
-
-### Game Operations
-
-```python
 # Record game result
 game = await db.record_game(
     username="player1",
@@ -96,17 +81,8 @@ game = await db.record_game(
     result_amount=200.0,
     game_details={"symbols": ["🍎", "🍎", "🍎"]}
 )
-```
 
-### Statistics
-
-```python
-# Get leaderboard
+# Get statistics
 leaders = await db.get_leaderboard(limit=10)
-
-# Get hall of shame
 shame = await db.get_hall_of_shame(limit=10)
-
-# Get user statistics
 stats = await db.get_user_stats("username")
-```
