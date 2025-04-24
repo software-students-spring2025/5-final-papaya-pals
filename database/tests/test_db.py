@@ -5,7 +5,8 @@ import pytest
 import pytest_asyncio
 from typing import AsyncGenerator
 from motor.motor_asyncio import AsyncIOMotorClient
-from database import Database, GameType
+from src.db import Database
+from src.models.game import GameType
 
 @pytest_asyncio.fixture
 async def db() -> AsyncGenerator[Database, None]:
