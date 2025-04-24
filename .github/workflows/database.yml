@@ -34,6 +34,7 @@ jobs:
         cd database
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install -e .
     
     - name: Run tests
       run: |
@@ -48,11 +49,14 @@ jobs:
         file: ./database/coverage.xml
         flags: database
         fail_ci_if_error: true
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   build-and-push:
     needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: production
     
     steps:
     - uses: actions/checkout@v4
@@ -81,6 +85,7 @@ jobs:
     needs: build-and-push
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: production
     
     steps:
     - name: Deploy to Digital Ocean

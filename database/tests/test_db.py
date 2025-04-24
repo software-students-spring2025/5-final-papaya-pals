@@ -1,19 +1,20 @@
 """Unit tests for database operations."""
 import os
+import uuid
 import pytest
 import pytest_asyncio
 from typing import AsyncGenerator
 from motor.motor_asyncio import AsyncIOMotorClient
-from ..src.db import Database
-from ..src.models.game import GameType
+from database.src.db import Database
+from database.src.models.game import GameType
 
 @pytest_asyncio.fixture
 async def db() -> AsyncGenerator[Database, None]:
     """Database fixture for testing."""
-    # Use test database
+    # Use test database with unique name to avoid conflicts
     test_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
     client = AsyncIOMotorClient(test_uri)
-    db_name = "test_fruit_casino"
+    db_name = f"test_fruit_casino_{uuid.uuid4().hex}"
     
     # Create test database instance
     test_db = Database(test_uri)
