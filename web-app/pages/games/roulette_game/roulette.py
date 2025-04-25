@@ -24,6 +24,7 @@ def choose_bet(r_bet_values, bankroll):
             st.warning("You don't have enough funds for that bet.")
     return 0
 
+
 def evaluate_roulette_result(result, bet, number_pick, color_bet, parity_bet):
     """Evaluates the roulette result."""
     winnings = 0
@@ -46,7 +47,9 @@ def evaluate_roulette_result(result, bet, number_pick, color_bet, parity_bet):
 
     # Even/Odd bet
     if parity_bet != "None" and result != 0:
-        if (parity_bet == "Even" and result % 2 == 0) or (parity_bet == "Odd" and result % 2 == 1):
+        if (parity_bet == "Even" and result % 2 == 0) or (
+            parity_bet == "Odd" and result % 2 == 1
+        ):
             winnings += bet
             messages.append(("success", "Parity match!"))
         else:
@@ -102,11 +105,8 @@ def play_roulette():
         st.write(f"The ball landed on: **{result} ({result_color})**")
 
         winnings, messages = evaluate_roulette_result(
-            result,
-            bet,
-            number_pick,
-            color_bet,
-            parity_bet)
+            result, bet, number_pick, color_bet, parity_bet
+        )
 
         for level, msg in messages:
             # st.success / st.info etc.
