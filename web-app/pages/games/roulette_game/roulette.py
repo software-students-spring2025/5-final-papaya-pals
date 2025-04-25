@@ -21,8 +21,7 @@ def choose_bet(r_bet_values, bankroll):
         if st.button(f"Bet ${val}"):
             if val <= bankroll:
                 return val
-            else:
-                st.warning("You don't have enough funds for that bet.")
+            st.warning("You don't have enough funds for that bet.")
     return 0
 
 def evaluate_roulette_result(result, bet, number_pick, color_bet, parity_bet):
