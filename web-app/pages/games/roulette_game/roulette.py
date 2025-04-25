@@ -26,19 +26,20 @@ def play_roulette():
         st.markdown(f"**Shame Counter:** {st.session_state.shame_counter}")
 
     st.write(f"Bankroll: ${st.session_state.bankroll}")
+    st.write(f"Current Bet: ${st.session_state.roulette_bet_amount}")
 
-    # Session state
-    if "roulette_bet_amount" not in st.session_state:
-        st.session_state.roulette_bet_amount = 1
+    # Changed way to choose bets
+    st.markdown("#### Choose your bet:")
+    cols = st.columns(6)
+    bet_values = [1, 5, 10, 50, 100, 1000]
+    for i, val in enumerate(bet_values):
+        if cols[i].button(f"Bet ${val}"):
+            if val <= st.session_state.bankroll:
+                st.session_state.roulette_bet_amount = val
+                st.session_state.bankroll -= val
+            else:
+                st.warning("You don't have enough funds for that bet.")
 
-    _roulette_bet = st.number_input(
-        "Enter your bet amount:",
-        min_value=1,
-        max_value=st.session_state.bankroll,
-        step=1,
-        value=st.session_state.roulette_bet_amount,  # Fixed bet logic
-        key="roulette_bet_amount",
-    )
 
     # Main number pick (optional)
     number_pick = st.number_input(
@@ -69,13 +70,15 @@ def play_roulette():
         # Number bet
         if result == number_pick:
             winnings += 35 * bet
-            st.success(f"You hit your number! +${35 * bet}")
+            st.success(f"You hit your number!")
+        else:
+            st.info(f"You did not hit your number.")
 
         # Color bet
         if color_bet != "None" and result != 0:
             if result_color.lower() == color_bet.lower():
                 winnings += bet
-                st.success(f"Color match! +${bet}")
+                st.success(f"Color match!")
             else:
                 st.info("No match on color.")
 
@@ -85,7 +88,7 @@ def play_roulette():
                 parity_bet == "Odd" and result % 2 == 1
             ):
                 winnings += bet
-                st.success(f"Parity match! +${bet}")
+                st.success(f"Parity match!")
             else:
                 st.info("No match on even/odd.")
 
