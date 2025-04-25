@@ -113,8 +113,3 @@ def play_roulette():
 
         if winnings == 0:
             st.error("No wins this time!")
-
-        if st.session_state.bankroll <= 0:
-            st.session_state.shame_counter += 1
-            st.warning("You're bankrupt! Reloading funds...")
-            st.session_state.bankroll = 1000
