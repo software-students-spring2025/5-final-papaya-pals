@@ -11,11 +11,14 @@ pytest = "*"
 pylint = "*"
 black = "*"
 motor = "*"
+pytest_asyncio = "*"
+pydantic = "*"
 
 [dev-packages]
 pytest = "*"
 pylint = "*"
 black = "*"
+pytest_asyncio = "*"
 
 [requires]
 python_version = "3"
