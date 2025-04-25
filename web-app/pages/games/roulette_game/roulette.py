@@ -17,14 +17,13 @@ def get_color(num):
 
 def choose_bet(r_bet_values, bankroll):
     """Helper to choose bet value."""
-    for i, val in enumerate(r_bet_values):
+    for val in enumerate(r_bet_values):
         if st.button(f"Bet ${val}"):
             if val <= bankroll:
                 return val
             else:
                 st.warning("You don't have enough funds for that bet.")
     return 0
-
 
 def evaluate_roulette_result(result, bet, number_pick, color_bet, parity_bet):
     """Evaluates the roulette result."""
@@ -36,7 +35,7 @@ def evaluate_roulette_result(result, bet, number_pick, color_bet, parity_bet):
         winnings += 35 * bet
         messages.append(("You hit your number!"))
     else:
-            messages.append(("info", "You did not hit your number."))
+        messages.append(("info", "You did not hit your number."))
 
     # Color bet
     if color_bet != "None" and result != 0:
@@ -103,7 +102,12 @@ def play_roulette():
         result_color = get_color(result)
         st.write(f"The ball landed on: **{result} ({result_color})**")
 
-        winnings, messages = evaluate_roulette_result(result, bet, number_pick, color_bet, parity_bet)
+        winnings, messages = evaluate_roulette_result(
+            result,
+            bet,
+            number_pick,
+            color_bet,
+            parity_bet)
 
         for level, msg in messages:
             # st.success / st.info etc.
