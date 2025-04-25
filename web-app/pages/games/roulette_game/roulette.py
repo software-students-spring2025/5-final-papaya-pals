@@ -15,7 +15,7 @@ def get_color(num):
     return "Red" if num in RED_NUMBERS else "Black"
 
 
-def choose_bet(r_bet_values, bankroll):
+def choose_bet(r_bet_values):
     """Helper to choose bet value."""
     cols = st.columns(6)
     for i, val in enumerate(r_bet_values):
