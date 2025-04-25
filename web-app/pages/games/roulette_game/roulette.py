@@ -17,11 +17,14 @@ def get_color(num):
 
 def choose_bet(r_bet_values, bankroll):
     """Helper to choose bet value."""
-    for val in enumerate(r_bet_values):
-        if st.button(f"Bet ${val}"):
-            if val <= bankroll:
-                return val
-            st.warning("You don't have enough funds for that bet.")
+    cols = st.columns(6)
+    for i, val in enumerate(r_bet_values):
+        if cols[i].button(f"Bet ${val}"):
+            if val <= st.session_state.bankroll:
+                st.session_state.roulette_bet_amount = val
+                st.session_state.bankroll -= val
+            else:
+                st.warning("You don't have enough funds for that bet.")
     return 0
 
 
