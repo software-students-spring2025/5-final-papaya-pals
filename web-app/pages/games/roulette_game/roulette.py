@@ -70,15 +70,15 @@ def play_roulette():
         # Number bet
         if result == number_pick:
             winnings += 35 * bet
-            st.success(f"You hit your number!")
+            st.success("You hit your number!")
         else:
-            st.info(f"You did not hit your number.")
+            st.info("You did not hit your number.")
 
         # Color bet
         if color_bet != "None" and result != 0:
             if result_color.lower() == color_bet.lower():
                 winnings += bet
-                st.success(f"Color match!")
+                st.success("Color match!")
             else:
                 st.info("No match on color.")
 
@@ -88,7 +88,7 @@ def play_roulette():
                 parity_bet == "Odd" and result % 2 == 1
             ):
                 winnings += bet
-                st.success(f"Parity match!")
+                st.success("Parity match!")
             else:
                 st.info("No match on even/odd.")
 
