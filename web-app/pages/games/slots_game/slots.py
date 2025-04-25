@@ -6,7 +6,7 @@ import streamlit as st
 
 def play_slots():
     """This function runs the slots game"""
-
+    
     all_icons = ["🍒", "🍋", "🔔", "💎", "7️⃣"]
 
     col1, col2 = st.columns([3, 1])
@@ -16,20 +16,23 @@ def play_slots():
         st.markdown(f"**Shame Counter:** {st.session_state.shame_counter}")
 
     st.write(f"Bankroll: ${st.session_state.bankroll}")
+    st.write(f"Current Bet: ${st.session_state.slots_bet_amount}")
 
-    st.number_input(
-        "Enter your bet amount:",
-        min_value=1,
-        max_value=st.session_state.bankroll,
-        step=1,
-        value=st.session_state.slots_bet_amount,  # This fixed the bet logic
-        key="slots_bet_amount",
-    )  # noqa: F841
+    # Changed way to choose bets
+    st.markdown("#### Choose your bet:")
+    cols = st.columns(6)
+    bet_values = [1, 5, 10, 50, 100, 1000]
+    for i, val in enumerate(bet_values):
+        if cols[i].button(f"${val}"):
+            if val <= st.session_state.bankroll:
+                st.session_state.slots_bet_amount = val
+            else:
+                st.warning("You don't have enough funds for that bet.")
 
     # Spin the slot machine
     if st.button("Spin! 💰"):
         slots_bet_amount = st.session_state.slots_bet_amount
-
+        
         if slots_bet_amount > st.session_state.bankroll:
             st.warning("You don't have enough funds to place this bet.")
         else:
