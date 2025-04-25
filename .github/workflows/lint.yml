@@ -22,6 +22,7 @@ jobs:
       - name: Lint with pylint
         run: |
           cd web-app
+          pipenv run pylint *.py
           pipenv run pylint **/*.py
           pipenv run pylint **/**/*.py
       - name: Format with black
@@ -48,7 +49,6 @@ jobs:
       - name: Lint with pylint
         run: |
           cd database
-          pipenv run pylint *.py
           pipenv run pylint **/*.py
           pipenv run pylint **/**/*.py
       - name: Format with black
