@@ -6,7 +6,7 @@ import streamlit as st
 
 def play_slots():
     """This function runs the slots game"""
-    
+
     all_icons = ["🍒", "🍋", "🔔", "💎", "7️⃣"]
 
     col1, col2 = st.columns([3, 1])
@@ -32,7 +32,7 @@ def play_slots():
     # Spin the slot machine
     if st.button("Spin! 💰"):
         slots_bet_amount = st.session_state.slots_bet_amount
-        
+
         if slots_bet_amount > st.session_state.bankroll:
             st.warning("You don't have enough funds to place this bet.")
         else:
