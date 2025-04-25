@@ -45,13 +45,6 @@ def play_slots():
             result, win_amount = payout(chosen_icons, slots_bet_amount)
             st.write(result)
             st.session_state.bankroll += win_amount
-            '''
-            # Add to shame counter
-            if st.session_state.bankroll <= 0:
-                st.session_state.shame_counter += 1
-                st.write("You're bankrupt! Reloading funds...")
-                st.session_state.bankroll = 1000
-            '''
 
 def spin(icons):
     """This function generates a randomly "spun" trio of icons"""
