@@ -46,6 +46,7 @@ def play_slots():
             st.write(result)
             st.session_state.bankroll += win_amount
 
+
 def spin(icons):
     """This function generates a randomly "spun" trio of icons"""
 
