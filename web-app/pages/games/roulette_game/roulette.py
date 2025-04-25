@@ -31,8 +31,8 @@ def play_roulette():
     # Changed way to choose bets
     st.markdown("#### Choose your bet:")
     cols = st.columns(6)
-    bet_values = [1, 5, 10, 50, 100, 1000]
-    for i, val in enumerate(bet_values):
+    r_bet_values = [1, 5, 10, 50, 100, 1000]
+    for i, val in enumerate(r_bet_values):
         if cols[i].button(f"Bet ${val}"):
             if val <= st.session_state.bankroll:
                 st.session_state.roulette_bet_amount = val
