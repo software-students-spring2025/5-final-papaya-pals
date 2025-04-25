@@ -24,7 +24,7 @@ def play_slots():
         step=1,
         value=st.session_state.slots_bet_amount,  # This fixed the bet logic
         key="slots_bet_amount",
-    ) # noqa: F841
+    )  # noqa: F841
 
     # Spin the slot machine
     if st.button("Spin! 💰"):
