@@ -16,15 +16,18 @@ def play_slots():
         st.markdown(f"**Shame Counter:** {st.session_state.shame_counter}")
 
     st.write(f"Bankroll: ${st.session_state.bankroll}")
+    st.write(f"Current Bet: ${st.session_state.slots_bet_amount}")
 
-    _slots_bet = st.number_input(
-        "Enter your bet amount:",
-        min_value=1,
-        max_value=st.session_state.bankroll,
-        step=1,
-        value=st.session_state.slots_bet_amount,  # This fixed the bet logic
-        key="slots_bet_amount",
-    )
+    # Changed way to choose bets
+    st.markdown("#### Choose your bet:")
+    cols = st.columns(6)
+    bet_values = [1, 5, 10, 50, 100, 1000]
+    for i, val in enumerate(bet_values):
+        if cols[i].button(f"Bet ${val}"):
+            if val <= st.session_state.bankroll:
+                st.session_state.slots_bet_amount = val
+            else:
+                st.warning("You don't have enough funds for that bet.")
 
     # Spin the slot machine
     if st.button("Spin! 💰"):
@@ -35,16 +38,13 @@ def play_slots():
         else:
             st.session_state.bankroll -= slots_bet_amount
             chosen_icons = spin(all_icons)
-            st.write(" ".join(chosen_icons))
+            st.markdown(
+                f"<div style='font-size: 72px; text-align: center;'>{' '.join(chosen_icons)}</div>",
+                unsafe_allow_html=True,
+            )
             result, win_amount = payout(chosen_icons, slots_bet_amount)
             st.write(result)
             st.session_state.bankroll += win_amount
-
-            # Add to shame counter
-            if st.session_state.bankroll <= 0:
-                st.session_state.shame_counter += 1
-                st.write("You're bankrupt! Reloading funds...")
-                st.session_state.bankroll = 1000
 
 
 def spin(icons):
