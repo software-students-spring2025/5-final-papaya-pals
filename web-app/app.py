@@ -1,13 +1,13 @@
 """This application provides the basis of the web app structure."""
 
 import streamlit as st
-from pages.games.slots_game.slots import play_slots
-from pages.games.roulette_game.roulette import play_roulette
-from pages.games.blackjack.main import play_blackjack
-from pages.home import show_home
-from pages.login import show_login
-from pages.initialize import set_default_session_vars, reset_to_default
-from pages.reload import show_reload
+from app_pages.games.slots_game.slots import play_slots
+from app_pages.games.roulette_game.roulette import play_roulette
+from app_pages.games.blackjack.main import play_blackjack
+from app_pages.home import show_home
+from app_pages.login import show_login
+from app_pages.initialize import set_default_session_vars, reset_to_default
+from app_pages.reload import show_reload
 
 # set session vars
 set_default_session_vars()
