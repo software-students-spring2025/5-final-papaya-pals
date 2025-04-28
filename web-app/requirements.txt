@@ -4,4 +4,3 @@ python-dotenv
 pylint
 pytest
 black
-coverage
