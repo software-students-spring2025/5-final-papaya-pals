@@ -6,6 +6,7 @@ from app_pages.games.roulette_game.roulette import play_roulette
 from app_pages.games.blackjack.main import play_blackjack
 from app_pages.home import show_home
 from app_pages.login import show_login
+from app_pages.register import show_register
 from app_pages.initialize import set_default_session_vars, reset_to_default
 from app_pages.reload import show_reload
 import db
@@ -65,6 +66,8 @@ elif st.session_state.current_page == "unknown_game2":
     st.write("on game page")
 elif st.session_state.current_page == "login":
     show_login()
+elif st.session_state.current_page == "register":
+    show_register()
 elif st.session_state.current_page == "reload":
     show_reload()
 else:

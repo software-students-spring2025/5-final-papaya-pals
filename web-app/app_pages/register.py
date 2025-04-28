@@ -3,7 +3,7 @@
 import streamlit as st
 from db import create_user, get_user
 
-def register_page():
+def show_register():
     st.title("Register")
 
     username = st.text_input("Choose a username")

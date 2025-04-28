@@ -1,21 +1,20 @@
 """This file loads the page responsible for allowing user to login"""
 
 import streamlit as st
-from db import create_user, get_user
+from db import get_user
 
-def register_page():
-    st.title("Register")
+def show_login():
+    st.title("Login")
 
-    username = st.text_input("Choose a username")
-    password = st.text_input("Choose a password", type="password")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
 
-    if st.button("Register"):
-        # Check if user already exists
-        if get_user(username, password):
-            st.warning("User already exists. Try logging in.")
+    if st.button("Login"):
+        user_id = get_user(username, password)
+        if user_id:
+            st.success(f"Logged in successfully! (user_id: {user_id})")
+            # You can use Session State to store logged-in status
+            st.session_state["logged_in"] = True
+            st.session_state["username"] = username
         else:
-            new_user = create_user(username, password)
-            if new_user:
-                st.success("Registration successful! You can now log in.")
-            else:
-                st.error("Registration failed.")
+            st.error("Invalid username or password.")
