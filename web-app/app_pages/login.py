@@ -4,6 +4,7 @@ import streamlit as st
 from db import get_user
 
 def show_login():
+    """Display the login page where users can authenticate."""
     st.title("Login")
 
     username = st.text_input("Username")

@@ -1,9 +1,10 @@
-# web-app/app_pages/register.py
+"""Module for user registration page."""
 
 import streamlit as st
 from db import create_user, get_user
 
 def show_register():
+    """Display the registration page for new users."""
     st.title("Register")
 
     username = st.text_input("Choose a username")
