@@ -1,4 +1,4 @@
-"""This file loads the page responsible for allowing user to login"""
+# web-app/app_pages/register.py
 
 import streamlit as st
 from db import create_user, get_user
