@@ -2,6 +2,7 @@
 
 import streamlit as st
 
+
 def show_home():
     """This function displays the page elements for the home page"""
 
