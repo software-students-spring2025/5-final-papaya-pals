@@ -8,14 +8,6 @@ services:
       - MONGO_URI=mongodb://mongo:27017
     depends_on:
       - mongo
-      - db
-
-  db:
-    build: ./database
-    environment:
-      - MONGO_URI=mongodb://mongo:27017
-    depends_on:
-      - mongo
 
   mongo:
     image: mongo
