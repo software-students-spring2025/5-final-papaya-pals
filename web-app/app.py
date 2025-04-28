@@ -17,10 +17,8 @@ set_default_session_vars()
 # set page to "home"
 def load_homepage_cb():
     """This callback function will get called when user presses the home button"""
-
-    ### DB TESTING
-    db.get_user(None, None)
-    ###
+    
+    db.establish_connection()
     reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "home"
 

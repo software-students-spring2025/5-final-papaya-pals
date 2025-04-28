@@ -5,17 +5,21 @@ services:
     ports:
       - "8501:8501"
     environment:
-      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_DBNAME=fruitcasino
+      - MONGO_URI=mongodb://admin:secret@mongodb:27017
     depends_on:
-      - mongo
+      - mongodb
 
-  mongo:
+  mongodb:
     image: mongo
     restart: always
     ports:
       - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
     volumes:
-      - mongo_data:/data/db
+      - mongodb-data:/data/db
 
 volumes:
-  mongo_data:
+  mongodb-data:

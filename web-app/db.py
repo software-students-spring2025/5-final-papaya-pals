@@ -13,12 +13,22 @@ def establish_connection():
     load_dotenv()
 
     # connect MongoDB
-    uri = os.getenv("MONGO_URI")
+    """ uri = os.getenv("MONGO_URI")
     client = MongoClient(uri, server_api=ServerApi('1'), tlsCAFile=certifi.where())
     dbnane = os.getenv("MONGO_DBNAME")
-    mydb = client[dbnane]
+    mydb = client[dbnane] """
 
-    return mydb
+    cxn = MongoClient(os.getenv("MONGO_URI"))
+    db = cxn[os.getenv("MONGO_DBNAME")]
+
+    
+    try:
+        cxn.admin.command("ping")
+        print(" *", "Connected to MongoDB!")
+    except Exception as e:
+        print(" * MongoDB connection error:", e)
+
+    return db
 
 
 def get_user(username, password):
@@ -29,7 +39,22 @@ def get_user(username, password):
     mydb = establish_connection()
 
     user_table = mydb["users"]
-    newuser= {
+    exist= user_table.find_one({"username":username,"password":password})
+    if exist:
+        return exist["_id"]
+    else:
+        return None
+
+
+def create_user(username, password):
+    """This function creates a new user instance in the database"""
+    username = "admin"
+    password = "password"
+
+    mydb = establish_connection()
+
+    user_table = mydb["users"]
+    newuser = {
         "username": username, "password": password
     }
     user_table.insert_one(newuser)
@@ -38,9 +63,11 @@ def get_user(username, password):
     print(r)
 
     return r
-    
 
 
-def create_user(username, password):
-    """This function creates a new user instance in the database"""
-    pass
+def show_all_users():
+    mydb = establish_connection()
+    user_table = mydb["users"]
+    users = user_table.find({})
+
+    return users
