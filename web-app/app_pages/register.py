@@ -3,6 +3,7 @@
 import streamlit as st
 from db import create_user, get_user
 
+
 def show_register():
     """Display the registration page for new users."""
     st.title("Register")
