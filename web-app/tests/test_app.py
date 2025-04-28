@@ -5,7 +5,7 @@ import streamlit as st
 
 
 # Test functions
-def test_sanity_check(self):
+def test_sanity_check():
     """Basic test to ensure pytest runs properly"""
     expected = True
     actual = True
