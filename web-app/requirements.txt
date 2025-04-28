@@ -1,2 +1,6 @@
 streamlit
 pymongo
+python-dotenv
+pylint
+pytest
+black
