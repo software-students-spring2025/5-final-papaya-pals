@@ -1,7 +1,7 @@
-""""""
+"""This is the module to test the streamlit app functionality"""
 
-import pytest
-import streamlit as st
+import pytest  # pylint: disable=unused-import
+import streamlit as st  # pylint: disable=unused-import
 
 
 # Test functions
