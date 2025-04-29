@@ -9,18 +9,8 @@ def establish_connection():
     """This function connects to the running Mongo database instance."""
     # load environment variables
     load_dotenv()
-    uri = (
-        "mongodb://admin:secret@localhost:27017/fruitcasino?"
-        "authSource=admin&retryWrites=true&w=majority"
-    )
-
-    # connect MongoDB
-    cxn = MongoClient(
-        os.getenv(
-            "MONGO_URI",
-            uri,
-        ),
-    )
+    uri = os.getenv("MONGO_URI")
+    cxn = MongoClient(uri)
     db = cxn[os.getenv("MONGO_DBNAME", "fruitcasino")]
 
     try:
