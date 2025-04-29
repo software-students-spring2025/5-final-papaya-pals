@@ -7,7 +7,7 @@ def show_home():
     """This function displays the page elements for the home page"""
 
     # home page title
-    titlerow = st.columns([.1, 2, .1])
+    titlerow = st.columns([0.1, 2, 0.1])
     with titlerow[1]:
         st.title("Welcome to the Papaya Pals Casino!")
 
