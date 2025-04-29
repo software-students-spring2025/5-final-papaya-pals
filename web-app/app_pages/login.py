@@ -26,7 +26,6 @@ def show_login():
             else:
                 st.session_state.bankroll = 1000
                 st.session_state.shame_counter = 0
-            
             time.sleep(1)
             st.rerun()
         else:
