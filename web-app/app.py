@@ -46,6 +46,8 @@ def load_logout_cb():
 # show sidebar
 with st.sidebar:
     st.title("Casino Menu 🎲")
+    if st.session_state.user:
+        st.write(f"Hi, **{st.session_state.user}**!")
     st.button("Home", on_click=load_homepage_cb)
     if st.session_state.user == "":
         st.button("Login", on_click=load_login_cb)
