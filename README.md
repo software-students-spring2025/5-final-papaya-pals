@@ -23,7 +23,7 @@ This project provides a containerized system through these subsystems:
 
 ## **Deployment:**
 
-[Visit the Deployed App:](http://159.203.67.247:8501/)
+[Visit the Deployed App Here](http://159.203.67.247:8501/)
 
 ## Prerequisites
 
