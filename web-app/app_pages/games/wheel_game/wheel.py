@@ -1,5 +1,4 @@
 """This module contains functionality to run the Wheel of Fortune game"""
-# pylint: disable=import-error,duplicate-code,trailing-whitespace,line-too-long
 
 import random
 import streamlit as st  # pylint: disable=import-error
