@@ -2,7 +2,7 @@
 
 import time
 import streamlit as st
-from db import get_user, get_user_data
+from db import get_user
 
 
 def show_login():
@@ -19,13 +19,6 @@ def show_login():
         if user_id:
             st.success("Login successful!")
             st.session_state.user = username
-            user_data = get_user_data(username)
-            if user_data:
-                st.session_state.bankroll = user_data["bankroll"]
-                st.session_state.shame_counter = user_data["shame_counter"]
-            else:
-                st.session_state.bankroll = 1000
-                st.session_state.shame_counter = 0
             time.sleep(1)
             st.rerun()
         else:
