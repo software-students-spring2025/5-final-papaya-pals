@@ -8,14 +8,15 @@ def show_login():
     """Display the login page where users can authenticate."""
     st.title("Login")
 
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    with st.form(key="login_form"):
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        submit_button = st.form_submit_button("Login")
 
-    if st.button("Login"):
+    if submit_button:
         user_id = get_user(username, password)
         if user_id:
             st.success(f"Logged in successfully! (user_id: {user_id})")
-            # You can use Session State to store logged-in status
             st.session_state["logged_in"] = True
             st.session_state["username"] = username
         else:
