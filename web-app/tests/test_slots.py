@@ -2,7 +2,6 @@
 
 from unittest import mock
 from types import SimpleNamespace
-import pytest
 from app_pages.games.slots_game.slots import play_slots, spin, payout
 
 # Test Functions

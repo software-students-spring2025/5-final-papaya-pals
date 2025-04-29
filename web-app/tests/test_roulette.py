@@ -2,7 +2,6 @@
 
 from unittest import mock
 from types import SimpleNamespace
-import pytest
 from app_pages.games.roulette_game.roulette import (
     get_color,
     evaluate_roulette_result,
@@ -34,7 +33,7 @@ def test_evaluate_roulette_number_hit():
     color_bet = "None"
     parity_bet = "None"
 
-    winnings, messages = evaluate_roulette_result(
+    winnings, _ = evaluate_roulette_result(
         result, bet, number_pick, color_bet, parity_bet
     )
 
