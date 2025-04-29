@@ -6,6 +6,7 @@ from app_pages.games.roulette_game.roulette import play_roulette
 from app_pages.games.blackjack.main import play_blackjack
 from app_pages.home import show_home
 from app_pages.login import show_login
+from app_pages.register import show_register
 from app_pages.initialize import set_default_session_vars, reset_to_default
 from app_pages.reload import show_reload
 import db
@@ -29,6 +30,13 @@ def load_login_cb():
     st.session_state.current_page = "login"
 
 
+# set page to "register"
+def load_register_cb():
+    """This callback function will get called when user presses the register button"""
+    reset_to_default(st.session_state.current_page)
+    st.session_state.current_page = "register"
+
+
 # log out
 def load_logout_cb():
     """This callback function will get called when user presses the logout button"""
@@ -40,9 +48,12 @@ def load_logout_cb():
 # show sidebar
 with st.sidebar:
     st.title("Casino Menu 🎲")
+    if st.session_state.user:
+        st.write(f"Hi, **{st.session_state.user}**!")
     st.button("Home", on_click=load_homepage_cb)
     if st.session_state.user == "":
         st.button("Login", on_click=load_login_cb)
+        st.button("Register", on_click=load_register_cb)
     else:
         st.button("Logout", on_click=load_logout_cb)
 
@@ -65,6 +76,8 @@ elif st.session_state.current_page == "unknown_game2":
     st.write("on game page")
 elif st.session_state.current_page == "login":
     show_login()
+elif st.session_state.current_page == "register":
+    show_register()
 elif st.session_state.current_page == "reload":
     show_reload()
 else:

@@ -25,9 +25,6 @@ def establish_connection():
 
 def get_user(username, password):
     """This function finds a user in the data table if it exists"""
-    username = "admin"
-    password = "password"
-
     mydb = establish_connection()
 
     user_table = mydb["users"]
@@ -39,9 +36,6 @@ def get_user(username, password):
 
 def create_user(username, password):
     """This function creates a new user instance in the database"""
-    username = "admin"
-    password = "password"
-
     mydb = establish_connection()
 
     user_table = mydb["users"]

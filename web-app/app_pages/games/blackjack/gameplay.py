@@ -98,7 +98,6 @@ def continue_game(game_deck, dealer, player):
 
     # blackjack
     elif player.total1 == 21 or player.total2 == 21:
-
         # show (disabled) hit and stand buttons
         col1, col2, _extra = st.columns([0.1, 0.2, 0.7])
         with col1:
@@ -119,7 +118,6 @@ def continue_game(game_deck, dealer, player):
 
     # option to hit or stand
     else:
-
         # callback functions to change state of app when buttons clicked
         def hit_cb():
             st.session_state.blackjack_hits += 1
