@@ -29,11 +29,13 @@ def load_login_cb():
     reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "login"
 
+
 # set page to "register"
 def load_register_cb():
     """This callback function will get called when user presses the register button"""
     reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "register"
+
 
 # log out
 def load_logout_cb():
