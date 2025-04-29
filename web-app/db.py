@@ -48,7 +48,10 @@ def create_user(username, password):
     mydb = establish_connection()
 
     user_table = mydb["users"]
-    newuser = {"username": username, "password": password}
+    newuser = {
+        "username": username,
+        "password": password,
+    }
     user_table.insert_one(newuser)
     r = user_table.find_one({"username": username, "password": password}, {"_id": 1})
 
