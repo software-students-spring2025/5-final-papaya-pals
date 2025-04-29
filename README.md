@@ -19,10 +19,11 @@ This project provides a containerized system through these subsystems:
 - [Matthew Cheng](https://github.com/mattchng)
 - [Maya Humston](https://github.com/mayhumst)
 - [Shamaamah Ahmad](https://github.com/shamaamahh)
+- [Suhan]()
 
 ## **Deployment:**
 
-[Visit the Deployed App: (FILLER, REPLACE)](https://coolmathgames.com)
+[Visit the Deployed App:](http://159.203.67.247:8501/)
 
 ## Prerequisites
 
