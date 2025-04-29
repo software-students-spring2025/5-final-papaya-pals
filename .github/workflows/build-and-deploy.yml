@@ -10,10 +10,10 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: connect to droplet
-        run: |
-          ssh root@159.89.179.110
-          yes
-          2025-Papaya-Pals
-          ls
-  
+      - name: Execute remote SSH commands using password
+        uses: appleboy/ssh-action@v1
+        with:
+          host: 159.89.179.110
+          username: root
+          password: 2025-Papaya-Pals
+          script: ls
