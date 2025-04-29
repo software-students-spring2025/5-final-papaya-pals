@@ -5,6 +5,7 @@ from app_pages.games.slots_game.slots import play_slots, spin, payout
 
 # Test Functions:
 
+
 def test_slots_icons_display():
     """Tests icon display"""
     all_icons = ["🍒", "🍋", "🔔", "💎", "7️⃣"]
@@ -34,4 +35,3 @@ def test_three_of_a_kind_payout():
     three = ["🍋", "🍋", "🍋"]
     _, winnings = payout(three, 50)
     assert winnings == 250
-
