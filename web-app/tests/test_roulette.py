@@ -123,12 +123,12 @@ def test_play_roulette_spin_win(mock_random, mock_eval, mock_color, mock_st):
     )
 
     # Mock layout
-    mock_col1 = mock.MagicMock()
-    mock_col2 = mock.MagicMock()
-    mock_cols_bet = [mock.MagicMock() for _ in range(6)]
+    col1 = mock.MagicMock()
+    col2 = mock.MagicMock()
+    cols_bet = [mock.MagicMock() for _ in range(6)]
 
-    mock_st.columns.side_effect = [(mock_col1, mock_col2), tuple(mock_cols_bet)]
-    for col in mock_cols_bet:
+    mock_st.columns.side_effect = [(col1, col2), tuple(cols_bet)]
+    for col in cols_bet:
         col.button.return_value = False
 
     # Mock UI inputs
