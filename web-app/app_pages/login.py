@@ -1,8 +1,8 @@
 """This file loads the page responsible for allowing user to login"""
 
+import time
 import streamlit as st
 from db import get_user
-import time
 
 def show_login():
     """Display the login page where users can authenticate."""
