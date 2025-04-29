@@ -1,6 +1,7 @@
 """This file loads the page responsible for reloading user funds"""
 
 import streamlit as st
+from app import autosave_user_data
 
 def show_reload():
     """This function displays page elements for reload page"""
@@ -17,5 +18,6 @@ def show_reload():
         st.session_state.bankroll = 1000
         st.session_state.shame_counter += 1
         st.session_state.current_page = "home"
+        autosave_user_data()
 
     st.button("I suck at gambling", on_click=cb)
