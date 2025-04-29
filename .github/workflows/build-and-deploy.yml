@@ -16,6 +16,7 @@ jobs:
           host: 159.89.179.110
           username: root
           password: 2025-Papaya-Pals
-          script: docker-compose down |
+          script: cd 5-final* |
+            docker-compose down |
             git pull origin main |
             docker-compose up --force-recreate --build -d 
