@@ -9,7 +9,7 @@ def show_home():
     # home page title
     titlerow = st.columns([1, 1, 1])
     with titlerow[1]:
-        st.title("Let's play!")
+        st.title("Welcome to the Papaya Pals Casino!")
 
     st.write("")
     st.write("")

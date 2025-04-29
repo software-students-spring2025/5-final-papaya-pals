@@ -1,28 +1,31 @@
-# Fruit Casino
+# Papaya Pals Casino Games Web App
 
 ## **Overview**
 
-The Fruit Casino is an online platform that allows you to fulfill your gambling wishes without wasting real, hard-earned money! Gamble using virtual funds - and when you run out, refill your bankroll for free. However, going bankrupt will add counters to your Shame Counter. Compete with friends to see how much moeny you can make, without gathering too much shame.
+Papaya Pals Casino is a casino style web application that brings classic games like **Slots**, **Roulette**, and **Blackjack** to life in your browser. It's built using Streamlit for an interactive UI and is designed to simulate betting, spinning, and scoring in a playful environment.
+
+Whether you're testing your luck or exploring game logic, Papaya Pals Casino is a fun way to gamble using virtual funds. When you run out, refill your bankroll for free. However, going bankrupt will add counters to your Shame Counter. Compete with friends to see how much money you can make, without gathering too much shame.
 
 This project provides a containerized system through these subsystems:
 1. **Database:** MongoDB database for storing data
 2. **Web Interface:** Front-end display using Streamlit that displays data and enables user interfacing.
 
-## **Deployment:**
-[Visit the Deployed App: (FILLER, REPLACE)](https://coolmathgames.com)
-
 ## Team Members:
+
 - [Matthew Cheng](https://github.com/mattchng)
 - [Maya Humston](https://github.com/mayhumst)
 - [Shamaamah Ahmad](https://github.com/shamaamahh)
-- []()
 
-## Configuration and Run Instructions
+## **Deployment:**
+
+[Visit the Deployed App: (FILLER, REPLACE)](https://coolmathgames.com)
 
 ### Prerequisites
+
 Make sure both **[Docker](https://www.docker.com/products/docker-desktop)** and **[Docker Compose](https://docs.docker.com/compose/install/)** are installed.
 
-### Config and Setup
+### Configuration and Setup
+
 1. Clone the repository:
 ```bash
 git clone git@github.com:software-students-spring2025/5-final-papaya-pals.git
