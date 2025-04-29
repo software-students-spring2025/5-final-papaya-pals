@@ -70,10 +70,6 @@ elif st.session_state.current_page == "home":
     show_home()
 elif st.session_state.current_page == "roulette":
     play_roulette()
-elif st.session_state.current_page == "unknown_game1":
-    st.write("on game page")
-elif st.session_state.current_page == "unknown_game2":
-    st.write("on game page")
 elif st.session_state.current_page == "login":
     show_login()
 elif st.session_state.current_page == "register":

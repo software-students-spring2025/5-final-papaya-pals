@@ -60,7 +60,7 @@ def test_page_navigation():
 
     assert at.session_state.current_page == "login"
 
-    """ # find and press register button
+    # find and press register button
     button = -1
     for i in range(0, len(at.button)):
         if "Register" in at.button[i].label:
@@ -68,7 +68,7 @@ def test_page_navigation():
     assert button != -1, "button does not exist"
     at.button[button].click().run()
 
-    assert at.session_state.current_page == "register" """
+    assert at.session_state.current_page == "register"
 
     # find and press home button
     button = -1
@@ -109,3 +109,36 @@ def test_page_navigation():
     at.button[button].click().run()
 
     assert at.session_state.current_page == "roulette"
+
+
+def test_fake_login():
+    # navigate home
+    at = AppTest.from_file("app.py").run()
+
+    # set session user
+    at.session_state.user = "random"
+    at.run()
+
+    # ensure login/register are not present in buttons; logout is present
+    for i in range(0, len(at.button)):
+        if "Logout" in at.button[i].label:
+            button = i
+        assert "Login" not in at.button[i].label
+        assert "Register" not in at.button[i].label
+    assert button != -1, "button does not exist"
+    # press logout button
+    at.button[i].click().run()
+
+    assert at.session_state.current_page == "home"
+    assert at.session_state.user == ""
+
+
+def test_unknown_page_request():
+    # navigate home
+    at = AppTest.from_file("app.py").run()
+
+    # set session page to unknown
+    at.session_state.current_page = "random"
+    at.run()
+
+    assert at.exception[0].message == "Unknown page request from st.session_state.current_page"
