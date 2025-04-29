@@ -77,11 +77,3 @@ elif st.session_state.current_page == "reload":
     show_reload()
 else:
     raise ValueError("Unknown page request from st.session_state.current_page")
-
-def autosave_user_data():
-    if st.session_state.user:
-        db.update_user_data(
-            st.session_state.user,
-            st.session_state.bankroll,
-            st.session_state.shame_counter
-        )
