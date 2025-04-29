@@ -3,8 +3,6 @@
 import streamlit as st
 from .deck import Deck, Hand
 from .cardlist import standard_cardlist
-from app import autosave_user_data
-
 
 # Initialize player, dealer, deck and game play. Cache these variables
 @st.cache_data()
@@ -75,7 +73,6 @@ def finish(result):
     st.session_state.blackjack_hits = 0
     st.session_state.blackjack_stood = False
     st.session_state.blackjack_bet_amount = 0
-    autosave_user_data()
     start_game_cached.clear()
     st.button("New Game?")
 

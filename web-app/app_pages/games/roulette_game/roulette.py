@@ -2,8 +2,6 @@
 
 import random
 import streamlit as st
-from app import autosave_user_data
-
 
 # Standard European roulette red numbers
 RED_NUMBERS = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36}
@@ -120,5 +118,3 @@ def play_roulette():
 
         if winnings == 0:
             st.error("No wins this time!")
-        
-        autosave_user_data()
