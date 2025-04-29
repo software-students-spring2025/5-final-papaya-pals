@@ -8,16 +8,19 @@ def show_register():
     """Display the registration page for new users."""
     st.title("Register")
 
-    username = st.text_input("Choose a username")
-    password = st.text_input("Choose a password", type="password")
+    with st.form("registration_form"):
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        submitted = st.form_submit_button("Register")
 
-    if st.button("Register"):
-        # Check if user already exists
-        if get_user(username, password):
-            st.warning("User already exists. Try logging in.")
-        else:
-            new_user = create_user(username, password)
-            if new_user:
-                st.success("Registration successful! You can now log in.")
+        if submitted:
+            # Check if user already exists
+            existing_user = get_user(username, password)
+            if existing_user:
+                st.warning("User already exists.")
             else:
-                st.error("Registration failed.")
+                user = create_user(username, password)
+                if user:
+                    st.success("Registration successful! You can now log in.")
+                else:
+                    st.error("Something went wrong during registration.")
