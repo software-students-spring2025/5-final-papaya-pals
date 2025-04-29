@@ -1,8 +1,8 @@
 """These are the unit tests for Roulette"""
 
-import pytest
 from unittest import mock
 from types import SimpleNamespace
+import pytest
 from app_pages.games.roulette_game.roulette import (
     get_color,
     evaluate_roulette_result,
