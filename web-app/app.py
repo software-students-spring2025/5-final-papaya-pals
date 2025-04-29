@@ -1,9 +1,10 @@
 """This application provides the basis of the web app structure."""
 
-import streamlit as st
+import streamlit as st  # pylint: disable=import-error
 from app_pages.games.slots_game.slots import play_slots
 from app_pages.games.roulette_game.roulette import play_roulette
 from app_pages.games.blackjack.main import play_blackjack
+from app_pages.games.wheel_game.wheel import play_wheel
 from app_pages.home import show_home
 from app_pages.login import show_login
 from app_pages.register import show_register
@@ -69,6 +70,8 @@ elif st.session_state.current_page == "home":
     show_home()
 elif st.session_state.current_page == "roulette":
     play_roulette()
+elif st.session_state.current_page == "wheel":
+    play_wheel()
 elif st.session_state.current_page == "login":
     show_login()
 elif st.session_state.current_page == "register":
