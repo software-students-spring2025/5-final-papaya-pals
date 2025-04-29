@@ -73,7 +73,10 @@ def test_blackjack_dealt_blackjack_win():
     while brk == False:
         game = setup_game()
         for md in game.markdown.values:
-            if "Player total: 21" in md and "Dealer total: 21" not in md:
+            if "Dealer total: 21" in md:
+                brk = False
+                break
+            if "Player total: 21" in md:
                 brk = True
 
     print(game.markdown.values)
