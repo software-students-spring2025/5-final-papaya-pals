@@ -23,8 +23,8 @@ RUN pip install --upgrade pip && \
 COPY . .
 
 # Expose the port Streamlit runs on
-EXPOSE 8080
+EXPOSE 8501
 
 # Run Streamlit
-CMD ["streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
 
