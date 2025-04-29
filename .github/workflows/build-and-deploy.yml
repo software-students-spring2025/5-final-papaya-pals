@@ -17,6 +17,7 @@ jobs:
           username: root
           password: 2025-Papaya-Pals
           script: cd 5-final* | 
+            ls |
             docker-compose down |
             git pull origin main |
             docker-compose up --force-recreate --build -d 
