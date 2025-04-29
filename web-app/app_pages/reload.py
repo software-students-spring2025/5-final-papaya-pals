@@ -2,6 +2,7 @@
 
 import streamlit as st
 
+
 def show_reload():
     """This function displays page elements for reload page"""
 
