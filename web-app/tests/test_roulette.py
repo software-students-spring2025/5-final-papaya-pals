@@ -1,4 +1,5 @@
 """These are the unit tests for Roulette"""
+# pylint: disable=duplicate-code
 
 from unittest import mock
 from types import SimpleNamespace
