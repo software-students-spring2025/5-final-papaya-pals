@@ -1,5 +1,9 @@
 # Papaya Pals Casino Games Web App
 
+![Lint-free](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/lint.yml)
+![Database CI/CD](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/database.yml)
+![Web App Build Status](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/build-and-test.yml?page=3)
+
 ## **Overview**
 
 Papaya Pals Casino is a casino style web application that brings classic games like **Slots**, **Roulette**, and **Blackjack** to life in your browser. It's built using Streamlit for an interactive UI and is designed to simulate betting, spinning, and scoring in a playful environment.
@@ -20,12 +24,16 @@ This project provides a containerized system through these subsystems:
 
 [Visit the Deployed App: (FILLER, REPLACE)](https://coolmathgames.com)
 
-### Prerequisites
+## Prerequisites
 
-Make sure both **[Docker](https://www.docker.com/products/docker-desktop)** and **[Docker Compose](https://docs.docker.com/compose/install/)** are installed.
+- Make sure both **[Docker](https://www.docker.com/products/docker-desktop)** and **[Docker Compose](https://docs.docker.com/compose/install/)** are installed.
+- Python 3.10+
+- pip or pipenv
+- Streamlit
 
-### Configuration and Setup
+## Configuration and Setup
 
+### Local Setup (No Docker)
 1. Clone the repository:
 ```bash
 git clone git@github.com:software-students-spring2025/5-final-papaya-pals.git
@@ -34,6 +42,19 @@ git clone git@github.com:software-students-spring2025/5-final-papaya-pals.git
 ```bash
 MONGO_URI = "PLACEHOLDER"
 ```
+3. Install Dependencies:
+```bash
+pipenv install --dev
+pipenv install streamlit
+pipenv shell
+```
+4. Run the Streamlit App:
+```bash
+streamlit run web-app/app.py
+```
+
+### Running with Docker
+[FILL IN]
 
 ### Running the System
 1. Ensure you are in the root directory, and run:
