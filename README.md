@@ -2,7 +2,7 @@
 
 ![Lint-free](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/lint.yml/badge.svg)
 ![Database CI/CD](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/database.yml/badge.svg)
-![Web App Build Status](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/build-and-test.yml?page=3/badge.svg)
+![ci](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/build-and-test.yml?page=3/badge.svg)
 
 ## **Overview**
 
