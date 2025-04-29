@@ -9,7 +9,7 @@ from app_pages.login import show_login
 from app_pages.register import show_register
 from app_pages.initialize import set_default_session_vars, reset_to_default
 from app_pages.reload import show_reload
-import db
+
 
 # set session vars
 set_default_session_vars()
