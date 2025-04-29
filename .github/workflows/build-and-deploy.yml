@@ -18,4 +18,4 @@ jobs:
           password: 2025-Papaya-Pals
           script: docker-compose down |
             git pull origin main |
-            docker-compose up --force-recreate --build -d
+            docker-compose up --force-recreate --build -d 
