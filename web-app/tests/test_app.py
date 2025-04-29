@@ -1,4 +1,5 @@
 """This is the module to test the streamlit app functionality"""
+# pylint: disable=duplicate-code,import-error
 
 import pytest  # pylint: disable=unused-import
 import streamlit as st  # pylint: disable=unused-import
