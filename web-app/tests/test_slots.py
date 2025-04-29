@@ -2,7 +2,6 @@
 
 import pytest
 from app_pages.games.slots_game.slots import play_slots, spin, payout
-from streamlit.testing.v1 import AppTest
 
 # Test Functions:
 
