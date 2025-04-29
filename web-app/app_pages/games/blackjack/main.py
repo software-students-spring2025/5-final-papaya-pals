@@ -2,7 +2,7 @@
 
 import streamlit as st
 from .gameplay import start_game_cached, place_bet, continue_game
-
+import db
 
 def play_blackjack():
     """This is the main function that controls blackjack playthrough"""

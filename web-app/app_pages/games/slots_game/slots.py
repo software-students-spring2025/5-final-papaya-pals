@@ -2,6 +2,7 @@
 
 import random
 import streamlit as st
+from app import autosave_user_data
 
 
 def play_slots():
@@ -45,6 +46,7 @@ def play_slots():
             result, win_amount = payout(chosen_icons, slots_bet_amount)
             st.write(result)
             st.session_state.bankroll += win_amount
+            autosave_user_data()
 
 
 def spin(icons):
