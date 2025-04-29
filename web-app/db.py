@@ -11,8 +11,8 @@ def establish_connection():
     load_dotenv()
 
     # connect MongoDB
-    cxn = MongoClient(os.getenv("MONGO_URI"))
-    db = cxn[os.getenv("MONGO_DBNAME")]
+    cxn = MongoClient(os.getenv("MONGO_URI", "mongodb://admin:secret@localhost:27017/fruitcasino?authSource=admin&retryWrites=true&w=majority"), )
+    db = cxn[os.getenv("MONGO_DBNAME", "fruitcasino")]
 
     try:
         cxn.admin.command("ping")
