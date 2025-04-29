@@ -16,8 +16,8 @@ def show_login():
     if submit_button:
         user_id = get_user(username, password)
         if user_id:
-            st.success(f"Logged in successfully! (user_id: {user_id})")
-            st.session_state["logged_in"] = True
-            st.session_state["username"] = username
+            st.success("Login successful!")
+            st.session_state.user = username
+            st.rerun()
         else:
             st.error("Invalid username or password.")

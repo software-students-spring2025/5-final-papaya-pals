@@ -22,5 +22,7 @@ def show_register():
                 user = create_user(username, password)
                 if user:
                     st.success("Registration successful! You can now log in.")
+                    st.session_state.user = username
+                    st.rerun()
                 else:
                     st.error("Something went wrong during registration.")
