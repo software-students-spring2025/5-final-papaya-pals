@@ -2,9 +2,9 @@
 
 import pytest
 from app_pages.games.slots_game.slots import play_slots, spin, payout
+from streamlit.testing.v1 import AppTest
 
 # Test Functions:
-
 
 def test_slots_icons_display():
     """Tests icon display"""
@@ -12,8 +12,8 @@ def test_slots_icons_display():
     result = spin(all_icons)
 
     assert len(result) == 3
-    for all_icons in result:
-        assert all_icons in all_icons
+    for icons in result:
+        assert icons in all_icons
 
 
 def test_jackpot_payout():
@@ -35,3 +35,4 @@ def test_three_of_a_kind_payout():
     three = ["🍋", "🍋", "🍋"]
     _, winnings = payout(three, 50)
     assert winnings == 250
+
