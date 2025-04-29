@@ -1,8 +1,8 @@
 # Papaya Pals Casino Games Web App
 
 ![Lint-free](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/lint.yml/badge.svg)
-![Database CI/CD](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/database.yml/badge.svg)
-![Web App Build Status](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/build-and-test.yml/badge.svg)
+![CD](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/build-and-deploy.yml/badge.svg)
+![CI](https://github.com/software-students-spring2025/5-final-papaya-pals/actions/workflows/build-and-test.yml/badge.svg)
 
 ## **Overview**
 
