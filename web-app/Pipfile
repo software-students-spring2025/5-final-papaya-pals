@@ -10,10 +10,12 @@ dotenv = "*"
 pytest = "*"
 pylint = "*"
 black = "*"
+coverage = "*"
 
 [dev-packages]
 pytest = "*"
 pylint = "*"
+coverage = "*"
 
 [requires]
 python_version = "3"
