@@ -143,9 +143,9 @@ def test_blackjack_tie():
 
             # find and click stand button
             button = -1
-            for i in range(
+            for i in range(  # pylint: disable=consider-using-enumerate
                 0, len(game.button)
-            ):  # pylint: disable=consider-using-enumerate
+            ):
                 if "Stand" in game.button[i].label:
                     button = i
             assert button != -1, "button does not exist"
