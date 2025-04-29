@@ -1,6 +1,6 @@
 """This module contains functionality to display the home page"""
 
-import streamlit as st
+import streamlit as st  # pylint: disable=import-error
 
 
 def show_home():
@@ -37,3 +37,12 @@ def show_home():
             st.session_state.current_page = "roulette"
 
         st.button("Roulette 🎯", on_click=cb_roulette, use_container_width=True)
+
+    # row 2 - wheel of fortune / placeholder / placeholder
+    row2 = st.columns([1, 1, 1])
+    with row2[0]:
+
+        def cb_wheel():
+            st.session_state.current_page = "wheel"
+
+        st.button("Wheel of Fortune 🎡", on_click=cb_wheel, use_container_width=True)
