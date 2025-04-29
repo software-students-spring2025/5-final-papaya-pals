@@ -9,7 +9,7 @@ from app_pages.login import show_login
 from app_pages.register import show_register
 from app_pages.initialize import set_default_session_vars, reset_to_default
 from app_pages.reload import show_reload
-import db
+
 
 # set session vars
 set_default_session_vars()
@@ -18,7 +18,6 @@ set_default_session_vars()
 # set page to "home"
 def load_homepage_cb():
     """This callback function will get called when user presses the home button"""
-    db.establish_connection()
     reset_to_default(st.session_state.current_page)
     st.session_state.current_page = "home"
 
@@ -70,10 +69,6 @@ elif st.session_state.current_page == "home":
     show_home()
 elif st.session_state.current_page == "roulette":
     play_roulette()
-elif st.session_state.current_page == "unknown_game1":
-    st.write("on game page")
-elif st.session_state.current_page == "unknown_game2":
-    st.write("on game page")
 elif st.session_state.current_page == "login":
     show_login()
 elif st.session_state.current_page == "register":
