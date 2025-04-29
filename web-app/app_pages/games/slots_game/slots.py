@@ -3,6 +3,7 @@
 import random
 import streamlit as st
 
+
 def play_slots():
     """This function runs the slots game"""
 

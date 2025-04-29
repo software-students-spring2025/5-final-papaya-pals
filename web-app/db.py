@@ -59,6 +59,7 @@ def create_user(username, password):
 
     return r
 
+
 def show_all_users():
     """This function returns all users in the database - PURELY for debugging purposes"""
     mydb = establish_connection()
