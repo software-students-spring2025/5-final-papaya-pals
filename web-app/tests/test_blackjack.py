@@ -6,71 +6,69 @@ from streamlit.testing.v1 import AppTest
 
 
 def setup_game():
+    """Helper function to setup a game - use repeatedly when desiring specific conditions"""
+
     # navigate home
     at = AppTest.from_file("app.py").run()
 
     # find and press blackjack button
     button = -1
-    for i in range(0, len(at.button)):
+    for i in range(0, len(at.button)):  # pylint: disable=consider-using-enumerate
         if "Blackjack" in at.button[i].label:
             button = i
     assert button != -1, "button does not exist"
     at.button[button].click().run()
 
     # find the number input and increment the bet
-    try:
-        for i in range(0, 5):
-            at.number_input[0].increment()
-    except Exception as e:
-        assert False, "error incrementing number input"
+    assert len(at.number_input) > 0, "Number input does not exist on the page"
+    for i in range(0, 5):
+        at.number_input[0].increment()
 
     # find and press 'Let's Go!' button
     button = -1
-    for i in range(0, len(at.button)):
+    for i in range(0, len(at.button)):  # pylint: disable=consider-using-enumerate
         if "Let's Go!" in at.button[i].label:
             button = i
     assert button != -1, "button does not exist"
     at.button[button].click().run()
-            
 
     return at
 
 
 def test_blackjack_dealt_bust():
-    """"""
-    
+    """test when blackjack hand is dealt as bust"""
+
     # get game that is already bust
     game = None
     brk = False
-    while brk == False:
+    while brk is False:
         game = setup_game()
         for md in game.markdown.values:
             if "Player total: 22" in md:
                 brk = True
 
     assert "Bust :( 💥" in game.markdown.values
-    
+
     # ensure game shows losing screen
     head = -1
-    for i in range(0, len(game.header)):
+    for i in range(0, len(game.header)):  # pylint: disable=consider-using-enumerate
         if game.header[i].value == "You lose!!":
             head = i
     assert head != -1, "You lose!! not in the text as a header"
 
     # ensure hit and stand buttons are disabled
     for button in game.button:
-        if button.value == "Hit" or button.value == "Stand":
-            assert button.disabled == True
-    
+        if button.value in ("Hit", "Stand"):
+            assert button.disabled is True
 
 
 def test_blackjack_dealt_blackjack_win():
-    """"""
-    
+    """test for when player is instantly dealt blackjack"""
+
     # get game that is already blackjack
     game = None
     brk = False
-    while brk == False:
+    while brk is False:
         game = setup_game()
         for md in game.markdown.values:
             if "Dealer total: 21" in md:
@@ -81,28 +79,27 @@ def test_blackjack_dealt_blackjack_win():
 
     print(game.markdown.values)
     assert "Blackjack!!! 🎉" in game.markdown.values
-    
+
     # ensure game shows winning screen
     head = -1
-    for i in range(0, len(game.header)):
+    for i in range(0, len(game.header)):  # pylint: disable=consider-using-enumerate
         if game.header[i].value == "You win!!":
             head = i
     assert head != -1, "You win!! not in the text as a header"
 
     # ensure hit and stand buttons are disabled
     for button in game.button:
-        if button.value == "Hit" or button.value == "Stand":
-            assert button.disabled == True
-    
+        if button.value in ("Hit", "Stand"):
+            assert button.disabled is True
 
 
 def test_blackjack_hit():
-    """"""
-    
+    """Test that a player can hit"""
+
     # get game that is able to hit
     game = None
     brk = False
-    while brk == False:
+    while brk is False:
         game = setup_game()
         for md in game.markdown.values:
             if "Player total: 15" in md:
@@ -112,12 +109,12 @@ def test_blackjack_hit():
 
     # ensure hit and stand buttons are NOT disabled
     for button in game.button:
-        if button.value == "Hit" or button.value == "Stand":
-            assert button.disabled == False
-    
+        if button.value in ("Hit", "Stand"):
+            assert button.disabled is False
+
     # find and click hit button
     button = -1
-    for i in range(0, len(game.button)):
+    for i in range(0, len(game.button)):  # pylint: disable=consider-using-enumerate
         if "Hit" in game.button[i].label:
             button = i
     assert button != -1, "button does not exist"
@@ -125,13 +122,12 @@ def test_blackjack_hit():
 
 
 def test_blackjack_tie():
-    """"""
-    
-    
+    """test what happens when player and dealer tie"""
+
     # get game that is able to hit
     game = None
     brk = False
-    while brk == False:
+    while brk is False:
         game = setup_game()
         for md in game.markdown.values:
             # find the 'player total' text element
@@ -147,7 +143,9 @@ def test_blackjack_tie():
 
             # find and click stand button
             button = -1
-            for i in range(0, len(game.button)):
+            for i in range(
+                0, len(game.button)
+            ):  # pylint: disable=consider-using-enumerate
                 if "Stand" in game.button[i].label:
                     button = i
             assert button != -1, "button does not exist"
@@ -157,18 +155,15 @@ def test_blackjack_tie():
             for md in game.markdown.values:
                 if "Dealer total:" not in md:
                     continue
-                    
+
                 # ensure dealer total == player total
                 if md == "Dealer total: " + num:
                     brk = True
                     break
-                
+
     # check if game is tied
     head = -1
-    for i in range(0, len(game.header)):
+    for i in range(0, len(game.header)):  # pylint: disable=consider-using-enumerate
         if game.header[i].value == "It's a tie...":
             head = i
     assert head != -1, "It's a tie... not in the text as a header"
-
-
-
