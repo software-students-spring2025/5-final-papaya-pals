@@ -10,21 +10,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Execute remote SSH commands using password
-        uses: appleboy/ssh-action@v1
-        with:
-          host: 159.89.179.110
-          username: root
-          password: 2025-Papaya-Pals
-          script: | 
-            cd 5-final-papaya-pals 
-            ls 
       - name: Execute remote ALL SSH commands using password
         uses: appleboy/ssh-action@v1
         with:
           host: 159.89.179.110
           username: root
-          password: 2025-Papaya-Pals
+          password: ${{ secrets.SSH_PASS }}
           script: | 
             cd 5-final-papaya-pals
             ls
