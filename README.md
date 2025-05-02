@@ -6,7 +6,7 @@
 
 ## **Overview**
 
-Papaya Pals Casino is a casino style web application that brings classic games like **Slots**, **Roulette**, and **Blackjack** to life in your browser. It's built using Streamlit for an interactive UI and is designed to simulate betting, spinning, and scoring in a playful environment.
+Papaya Pals Casino is a casino style web application that brings classic games like **Slots**, **Roulette**, **Blackjack**, and **Wheel of Fortune** to life in your browser. It's built using Streamlit for an interactive UI and is designed to simulate betting, spinning, and scoring in a playful environment.
 
 Whether you're testing your luck or exploring game logic, Papaya Pals Casino is a fun way to gamble using virtual funds. When you run out, refill your bankroll for free. However, going bankrupt will add counters to your Shame Counter. Compete with friends to see how much money you can make, without gathering too much shame.
 
@@ -19,7 +19,7 @@ This project provides a containerized system through these subsystems:
 - [Matthew Cheng](https://github.com/mattchng)
 - [Maya Humston](https://github.com/mayhumst)
 - [Shamaamah Ahmad](https://github.com/shamaamahh)
-- [Suhan]()
+- [Suhan Suresh](https://github.com/Suhansrh)
 
 ## **Deployment:**
 
@@ -55,19 +55,23 @@ streamlit run web-app/app.py
 ```
 
 ### Running with Docker
-[FILL IN]
-
-### Running the System
-1. Ensure you are in the root directory, and run:
+1. Clone the repository:
 ```bash
-docker-compose up
+git clone git@github.com:software-students-spring2025/5-final-papaya-pals.git
 ```
-
-2. Once the containers are up and running, open your browser and navigate to [http://localhost:8501/](http://localhost:8501/).
+2. Create a .env file (literally named: .env) in the root directory with the following contents:
+```bash
+MONGO_URI = "PLACEHOLDER"
+```
+3. Build and run the containers:
+```bash
+docker-compose up --build
+```
+4. Once the containers are up and running, open your browser and navigate to [http://localhost:8501/](http://localhost:8501/).
 
 
 ### Stopping the System
-1. Run:
+Run:
 ```bash
 docker-compose down
 ```
